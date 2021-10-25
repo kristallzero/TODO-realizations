@@ -1,13 +1,13 @@
 # My first node.js project: Simple TODO
-This project was written without express js, only http and fs modules. 
+This project was written without express js, only HTTP and fs modules. 
 
-This is the first realizaton of the synced TODO list — Simple TODO
+This is the first realization of the synced TODO list — Simple TODO
 
 # Features 
-- Every task will be save on the server side, every registered device can see this task
-- First time user needs to register or sign in to the system(All users and their passwords save in the json file)
-- Then all tasks cound be able to edit/delete/mark as done
-- To update TODO list, press Update button
+- Every task will be saved on the server-side, every registered device can see this task
+- First time user needs to register or sign in to the system(All users and their passwords saved in the JSON file)
+- Then all tasks could be able to edit/delete/mark as done
+- To update the TODO list, press the Update button
 
 # Starting up
 - `npm install` - install all dependencies
