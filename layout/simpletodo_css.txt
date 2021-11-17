@@ -1,0 +1,764 @@
+header 
+	.kristi_s_desk__public__hover_active {
+	  font-size: 30px;
+	  font-family: "Segoe UI";
+	  color: rgb(255, 233, 34);
+	  font-weight: bold;
+	  line-height: 0.5;
+	  text-align: left;
+	  text-shadow: 0px 2px 4.5px rgba(0, 0, 0, 0.35);
+	  position: absolute;
+	  left: 1px;
+	  top: 25.997px;
+	  z-index: 151;
+	}
+
+	.kristi_s_desk__public {
+	  font-size: 30px;
+	  font-family: "Segoe UI";
+	  color: rgb(214, 197, 39);
+	  font-weight: bold;
+	  line-height: 0.5;
+	  text-align: left;
+	  text-shadow: 0px 2px 4.5px rgba(0, 0, 0, 0.35);
+	  position: absolute;
+	  left: 1px;
+	  top: 25.997px;
+	  z-index: 150;
+	}
+	.Logo {
+	  font-size: 39px;
+	  font-family: "Segoe UI";
+	  color: rgb(212, 194, 34);
+	  font-weight: bold;
+	  text-transform: uppercase;
+	  line-height: 1.692;
+	  text-align: right;
+	  text-shadow: 0px 3px 4.5px rgba(0, 0, 0, 0.35);
+	  position: absolute;
+	  left: 398px;
+	  top: -10.494px;
+	  z-index: 149;
+	}
+	.User_account_hover {
+	  font-size: 16px;
+	  font-family: "Segoe UI";
+	  color: rgb(230, 210, 41);
+	  text-transform: uppercase;
+	  line-height: 0.938;
+	  text-align: right;
+	  text-shadow: 0px 2px 4.5px rgba(0, 0, 0, 0.35);
+	  position: absolute;
+	  left: 1013px;
+	  top: 15.894px;
+	  z-index: 148;
+	}
+	.User_account {
+	  font-size: 16px;
+	  font-family: "Segoe UI";
+	  color: rgb(230, 210, 41);
+	  text-transform: uppercase;
+	  line-height: 0.938;
+	  text-align: right;
+	  text-shadow: 0px 2px 4.5px rgba(0, 0, 0, 0.35);
+	  position: absolute;
+	  left: 1013px;
+	  top: 15.894px;
+	  z-index: 147;
+	}
+	.Header_Background {
+	  background-image: -moz-linear-gradient( 180deg, rgb(68,46,120) 0%, rgb(132,94,219) 100%);
+	  background-image: -webkit-linear-gradient( 180deg, rgb(68,46,120) 0%, rgb(132,94,219) 100%);
+	  background-image: -ms-linear-gradient( 180deg, rgb(68,46,120) 0%, rgb(132,94,219) 100%);
+	  position: absolute;
+	  left: 0px;
+	  top: 0px;
+	  width: 1100px;
+	  height: 40px;
+	  z-index: 146;
+	}
+
+settings
+	desks
+		.Opened_desk_indicator {
+		  border-radius: 50%;
+		  background-color: rgb(216, 207, 128);
+		  position: absolute;
+		  left: 28px;
+		  top: 79px;
+		  width: 5px;
+		  height: 5px;
+		  z-index: 142;
+		}
+		.current__desk {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(216, 207, 128);
+		  line-height: 0.833;
+		  text-align: left;
+		  text-shadow: 0px 1px 4.65px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 30px;
+		  top: 84.201px;
+		  z-index: 141;
+		}
+		.Background_hover(1) {
+		  border-radius: 7px;
+		  background-color: rgb(167, 137, 204);
+		  position: absolute;
+		  left: 25px;
+		  top: 70px;
+		  width: 174px;
+		  height: 20px;
+		  z-index: 140;
+		}
+		.desk_1 {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(255, 233, 34);
+		  line-height: 0.833;
+		  text-align: left;
+		  text-shadow: 0px 1px 4.65px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 23px;
+		  top: 107.201px;
+		  z-index: 139;
+		}
+		.Background_hover(2) {
+		  border-radius: 7px;
+		  background-color: rgb(167, 137, 204);
+		  position: absolute;
+		  left: 25px;
+		  top: 93px;
+		  width: 174px;
+		  height: 20px;
+		  z-index: 138;
+		}
+		.desk_2 {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(255, 233, 34);
+		  line-height: 0.833;
+		  text-align: left;
+		  text-shadow: 0px 1px 4.65px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 24px;
+		  top: 119.003px;
+		  z-index: 137;
+		}
+		.Background_hover(3) {
+		  border-radius: 7px;
+		  background-color: rgb(167, 137, 204);
+		  position: absolute;
+		  left: 25px;
+		  top: 116px;
+		  width: 180px;
+		  height: 20px;
+		  z-index: 136;
+		}
+		.desk_3 {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(255, 233, 34);
+		  line-height: 0.833;
+		  text-align: left;
+		  text-shadow: 0px 1px 4.65px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 23px;
+		  top: 143.003px;
+		  z-index: 135;
+		}
+		.Background_hover(4) {
+		  border-radius: 7px;
+		  background-color: rgb(167, 137, 204);
+		  position: absolute;
+		  left: 26px;
+		  top: 139px;
+		  width: 211px;
+		  height: 20px;
+		  z-index: 134;
+		}
+		.Desks__border {
+		  border-width: 2px;
+		  border-color: rgb(0, 0, 0);
+		  border-style: solid;
+		  border-radius: 10px;
+		  position: absolute;
+		  left: 20px;
+		  top: 65px;
+		  width: 218px;
+		  height: 95px;
+		  z-index: 133;
+		}
+
+	desk_settings
+		.Checkbox_Hover_active {
+		  border-width: 1px;
+		  border-color: rgb(158, 146, 40);
+		  border-style: solid;
+		  background-color: rgb(228, 211, 58);
+		  position: absolute;
+		  left: 26px;
+		  top: 181px;
+		  width: 15px;
+		  height: 11px;
+		  z-index: 130;
+		}
+		.Checkbox {
+		  border-width: 1px;
+		  border-color: rgb(0, 0, 0);
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 27px;
+		  top: 182px;
+		  width: 12px;
+		  height: 12px;
+		  z-index: 129;
+		}
+		.Public_desk {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(255, 233, 34);
+		  line-height: 0.833;
+		  text-align: left;
+		  position: absolute;
+		  left: 43px;
+		  top: 180.503px;
+		  z-index: 128;
+		}
+		.Editable {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(255, 233, 34);
+		  line-height: 0.833;
+		  text-align: left;
+		  position: absolute;
+		  left: 43px;
+		  top: 199.503px;
+		  z-index: 125;
+		}
+		.Settings_border {
+		  border-width: 2px;
+		  border-color: rgb(0, 0, 0);
+		  border-style: solid;
+		  border-radius: 10px;
+		  position: absolute;
+		  left: 20px;
+		  top: 174px;
+		  width: 218px;
+		  height: 43px;
+		  z-index: 124;
+		}
+	
+	members
+		.__Users {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(255, 255, 255);
+		  line-height: 0.833;
+		  text-align: left;
+		  position: absolute;
+		  left: 93.754px;
+		  top: 262.201px;
+		  z-index: 121;
+		}
+		.Members_border {
+			border-width: 2px;
+			border-color: rgb(0, 0, 0);
+			border-style: solid;
+			border-radius: 6px;
+			position: absolute;
+	        left: 20px;
+			top: 231px;
+			width: 218px;
+			height: 47px;
+			z-index: 120;
+		}
+
+Content
+	New Task
+		.Task_Input {
+		  font-size: 30px;
+		  font-family: "Segoe UI";
+		  color: rgb(0, 0, 0);
+		  line-height: 0.5;
+		  text-align: left;
+		  position: absolute;
+		  left: 94px;
+		  top: 121.997px;
+		  z-index: 113;
+		}
+		.New_task___ {
+		  font-size: 30px;
+		  font-family: "Segoe UI";
+		  color: rgb(168, 168, 168);
+		  line-height: 0.5;
+		  text-align: left;
+		  position: absolute;
+		  left: 95px;
+		  top: 106px;
+		  z-index: 112;
+		}
+		.Underline {
+		  background-color: rgb(168, 168, 168);
+		  position: absolute;
+		  left: 94px;
+		  top: 126px;
+		  width: 733px;
+		  height: 3px;
+		  z-index: 111;
+		}
+		.Checkbox_1 {
+		  border-width: 1px;
+		  border-color: rgb(0, 0, 0);
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 837px;
+		  top: 81px;
+		  width: 12px;
+		  height: 12px;
+		  z-index: 108;
+		}
+		.Multi {
+		  font-size: 16px;
+		  font-family: "Segoe UI";
+		  color: rgb(1, 1, 1);
+		  line-height: 0.938;
+		  text-align: right;
+		  position: absolute;
+		  left: 854px;
+		  top: 80.496px;
+		  z-index: 107;
+		}
+		.Checkbox_3_Hover_active {
+		  border-width: 1px;
+		  border-color: rgb(158, 146, 40);
+		  border-style: solid;
+		  background-color: rgb(228, 211, 58);
+		  position: absolute;
+		  left: 836px;
+		  top: 115px;
+		  width: 15px;
+		  height: 11px;
+		  z-index: 105;
+		}
+		.Checkbox_3 {
+		  border-width: 1px;
+		  border-color: rgb(0, 0, 0);
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 837px;
+		  top: 116px;
+		  width: 12px;
+		  height: 12px;
+		  z-index: 104;
+		}
+		.Plus_hover {
+		  background-image: -moz-linear-gradient( 90deg, rgb(81,70,135) 0%, rgb(140,99,207) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(81,70,135) 0%, rgb(140,99,207) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(81,70,135) 0%, rgb(140,99,207) 100%);
+		  position: absolute;
+		  left: 963px;
+		  top: 84px;
+		  width: 44px;
+		  height: 44px;
+		  z-index: 99;
+		}
+		.Add_task_button_hover {
+		  border-width: 3px;
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 949px;
+		  top: 70px;
+		  width: 65px;
+		  height: 65px;
+		  z-index: 98;
+		}
+
+		.Add_task_button {
+		  border-width: 3px;
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 949px;
+		  top: 70px;
+		  width: 65px;
+		  height: 65px;
+		  z-index: 96;
+		}
+		.New_task_input {
+		  border-width: 3px;
+		  border-style: solid;
+		  border-radius: 33px;
+		  box-shadow: 0px 3px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 79px;
+		  top: 69px;
+		  width: 935px;
+		  height: 67px;
+		  z-index: 94;
+		}
+	
+	Task 1
+		.Checkbox_Hover {
+		  border-width: 1px;
+		  border-color: rgb(158, 146, 40);
+		  border-style: solid;
+		  background-color: rgb(228, 211, 58);
+		  box-shadow: 0px 3px 4.25px 0.75px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 110px;
+		  top: 194px;
+		  width: 22px;
+		  height: 17px;
+		  z-index: 90;
+		}
+		.Task_Checkbox {
+		  border-width: 2px;
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 106px;
+		  top: 186px;
+		  width: 29px;
+		  height: 29px;
+		  z-index: 89;
+		}
+		.This_is_an_example_of_important_multi_task {
+		  font-size: 25px;
+		  font-family: "Segoe UI";
+		  color: rgb(37, 37, 37);
+		  font-weight: bold;
+		  line-height: 1;
+		  text-align: left;
+		  position: absolute;
+		  left: 143px;
+		  top: 216.748px;
+		  z-index: 88;
+		}
+		.date {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(84, 84, 84);
+		  line-height: 0.833;
+		  text-align: right;
+		  position: absolute;
+		  left: 871px;
+		  top: 202.201px;
+		  z-index: 87;
+		}
+		.kristi {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(84, 84, 84);
+		  line-height: 0.833;
+		  text-align: left;
+		  position: absolute;
+		  left: 905px;
+		  top: 204.503px;
+		  z-index: 86;
+		}
+		.Trash_button_hover_ {
+		  background-image: -moz-linear-gradient( 90deg, rgb(181,98,164) 0%, rgb(240,46,126) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(181,98,164) 0%, rgb(240,46,126) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(181,98,164) 0%, rgb(240,46,126) 100%);
+		  position: absolute;
+		  left: 954px;
+		  top: 178px;
+		  width: 50px;
+		  height: 50px;
+		  z-index: 84;
+		}
+		.Trash_button {
+		  background-image: -moz-linear-gradient( 90deg, rgb(182,53,156) 0%, rgb(239,10,106) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(182,53,156) 0%, rgb(239,10,106) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(182,53,156) 0%, rgb(239,10,106) 100%);
+		  box-shadow: 0px 3px 4.25px 0.75px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 954px;
+		  top: 178px;
+		  width: 50px;
+		  height: 50px;
+		  z-index: 83;
+		}
+		.Task_Checkbox {
+		  border-width: 2px;
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 143px;
+		  top: 223px;
+		  width: 29px;
+		  height: 29px;
+		  z-index: 81;
+		}
+		.This_is_an_example_subtask {
+		  font-size: 25px;
+		  font-family: "Segoe UI";
+		  color: rgb(37, 37, 37);
+		  line-height: 1;
+		  text-align: left;
+		  position: absolute;
+		  left: 179px;
+		  top: 253.748px;
+		  z-index: 80;
+		}
+		.Checkbox_Hover {
+		  border-width: 1px;
+		  border-color: rgb(158, 146, 40);
+		  border-style: solid;
+		  background-color: rgb(228, 211, 58);
+		  box-shadow: 0px 3px 4.25px 0.75px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 147px;
+		  top: 379px;
+		  width: 22px;
+		  height: 17px;
+		  z-index: 73;
+		}
+		.Task_Checkbox {
+		  border-width: 2px;
+		  border-color: rgb(166, 137, 201);
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 143px;
+		  top: 371px;
+		  width: 29px;
+		  height: 29px;
+		  z-index: 72;
+		}
+		.This_is_an_example_done_subtask {
+		  font-size: 25px;
+		  font-family: "Segoe UI";
+		  color: rgb(142, 142, 142);
+		  line-height: 1;
+		  text-align: left;
+		  position: absolute;
+		  left: 179px;
+		  top: 401.748px;
+		  z-index: 71;
+		}
+		.Multi_Task_1 {
+		  border-width: 3px;
+		  border-color: rgb(115, 43, 206);
+		  border-style: solid;
+		  border-radius: 23px;
+		  background-image: -moz-linear-gradient( 90deg, rgba(254,220,69,0.99608) 0%, rgb(252,166,111) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgba(254,220,69,0.99608) 0%, rgb(252,166,111) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgba(254,220,69,0.99608) 0%, rgb(252,166,111) 100%);
+		  box-shadow: 0px 3px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 92px;
+		  top: 174px;
+		  width: 909px;
+		  height: 237px;
+		  z-index: 69;
+		}
+	
+	Task 2
+		.Checkbox_Hover {
+		  border-width: 1px;
+		  border-color: rgb(158, 146, 40);
+		  border-style: solid;
+		  background-color: rgb(228, 211, 58);
+		  box-shadow: 0px 3px 4.25px 0.75px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 110px;
+		  top: 446px;
+		  width: 22px;
+		  height: 17px;
+		  z-index: 66;
+		}
+		.Task_Checkbox {
+		  border-width: 2px;
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 106px;
+		  top: 438px;
+		  width: 29px;
+		  height: 29px;
+		  z-index: 65;
+		}
+		.This_an_example_of_important_task {
+		  font-size: 25px;
+		  font-family: "Segoe UI";
+		  color: rgb(37, 37, 37);
+		  line-height: 1;
+		  text-align: left;
+		  position: absolute;
+		  left: 142px;
+		  top: 468.748px;
+		  z-index: 64;
+		}
+		.date {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(84, 84, 84);
+		  line-height: 0.833;
+		  text-align: right;
+		  position: absolute;
+		  left: 871px;
+		  top: 454.201px;
+		  z-index: 63;
+		}
+		.kristi {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(84, 84, 84);
+		  line-height: 0.833;
+		  text-align: right;
+		  position: absolute;
+		  left: 832px;
+		  top: 472.201px;
+		  z-index: 62;
+		}
+		.Trash_button_hover_ {
+		  background-image: -moz-linear-gradient( 90deg, rgb(181,98,164) 0%, rgb(240,46,126) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(181,98,164) 0%, rgb(240,46,126) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(181,98,164) 0%, rgb(240,46,126) 100%);
+		  position: absolute;
+		  left: 954px;
+		  top: 430px;
+		  width: 50px;
+		  height: 50px;
+		  z-index: 60;
+		}
+		.Trash_button {
+		  background-image: -moz-linear-gradient( 90deg, rgb(182,53,156) 0%, rgb(239,10,106) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(182,53,156) 0%, rgb(239,10,106) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(182,53,156) 0%, rgb(239,10,106) 100%);
+		  position: absolute;
+		  left: 954px;
+		  top: 430px;
+		  width: 50px;
+		  height: 50px;
+		  z-index: 59;
+		}
+		.Simple_Task_1 {
+		  border-width: 3px;
+		  border-color: rgb(120, 45, 212);
+		  border-style: solid;
+		  background-image: -moz-linear-gradient( 90deg, rgba(254,220,69,0.99608) 0%, rgb(252,166,111) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgba(254,220,69,0.99608) 0%, rgb(252,166,111) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgba(254,220,69,0.99608) 0%, rgb(252,166,111) 100%);
+		  box-shadow: 0px 3px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 92px;
+		  top: 426px;
+		  width: 909px;
+		  height: 51px;
+		  z-index: 58;
+		}
+	
+	Task 4
+		.Done_Checkbox_ {
+		  border-width: 1px;
+		  border-color: rgb(158, 151, 90);
+		  border-style: solid;
+		  background-color: rgb(227, 219, 145);
+		  box-shadow: 0px 3px 4.25px 0.75px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 109px;
+		  top: 692px;
+		  width: 22px;
+		  height: 17px;
+		  z-index: 35;
+		}
+		.Task_Checkbox {
+		  border-width: 2px;
+		  border-color: rgb(166, 137, 201);
+		  border-style: solid;
+		  border-radius: 50%;
+		  position: absolute;
+		  left: 106px;
+		  top: 684px;
+		  width: 29px;
+		  height: 29px;
+		  z-index: 34;
+		}
+		.This_is_a_done_task {
+		  font-size: 25px;
+		  font-family: "Segoe UI";
+		  color: rgb(142, 142, 142);
+		  line-height: 1;
+		  text-align: left;
+		  position: absolute;
+		  left: 142px;
+		  top: 688px;
+		  z-index: 33;
+		}
+		.date {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(142, 142, 142);
+		  line-height: 0.833;
+		  text-align: right;
+		  position: absolute;
+		  left: 871px;
+		  top: 700.201px;
+		  z-index: 32;
+		}
+		.kristi {
+		  font-size: 18px;
+		  font-family: "Segoe UI";
+		  color: rgb(142, 142, 142);
+		  line-height: 0.833;
+		  text-align: left;
+		  position: absolute;
+		  left: 905px;
+		  top: 701.503px;
+		  z-index: 31;
+		}
+		.Trash_button_Hover {
+		  background-image: -moz-linear-gradient( 90deg, rgb(181,74,160) 0%, rgb(240,55,132) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(181,74,160) 0%, rgb(240,55,132) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(181,74,160) 0%, rgb(240,55,132) 100%);
+		  position: absolute;
+		  left: 954px;
+		  top: 674px;
+		  width: 50px;
+		  height: 50px;
+		  z-index: 29;
+		}
+		.Trash_button_ {
+		  background-image: -moz-linear-gradient( 90deg, rgb(181,127,170) 0%, rgb(240,105,161) 100%);
+		  background-image: -webkit-linear-gradient( 90deg, rgb(181,127,170) 0%, rgb(240,105,161) 100%);
+		  background-image: -ms-linear-gradient( 90deg, rgb(181,127,170) 0%, rgb(240,105,161) 100%);
+		  position: absolute;
+		  left: 954px;
+		  top: 674px;
+		  width: 50px;
+		  height: 50px;
+		  z-index: 28;
+		}
+		.Simple_Task_2_done_ {
+		  border-width: 3px;
+		  border-color: rgb(166, 137, 201);
+		  border-style: solid;
+		  box-shadow: 0px 3px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+		  position: absolute;
+		  left: 92px;
+		  top: 670px;
+		  width: 909px;
+		  height: 51px;
+		  z-index: 27;
+		}
+	.Tasks_border {
+	  border-width: 3px;
+	  border-color: rgb(126, 50, 223);
+	  border-style: solid;
+	  border-radius: 33px;
+	  box-shadow: 0px 4px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+	  position: absolute;
+	  left: 79px;
+	  top: 161px;
+	  width: 935px;
+	  height: 689px;
+	  z-index: 9;
+	}
