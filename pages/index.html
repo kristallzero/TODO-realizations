@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/pages/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/pages/style.css" />
     <title>Simple TODO</title>
-</head>
+  </head>
 
-<body>
-    <header>
-        <h1>Simple TODO</h1>
-        <!-- <a href="/pages/" class="login">Log out</a> -->
-    </header>
-
-    <script src="/pages/index.js"></script>
-</body>
-
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="desk-title">
+          kristi's desk <span class="desk-type">(public)</span>
+        </div>
+        <span class="logo">SIMPLE TODO</span>
+        <div class="user">
+          HI, <span class="user__name">KRISTI</span>
+          <div class="user__logout">LOG OUT...</div>
+        </div>
+      </header>
+      <div class="content">
+        <div class="add">
+          <input type="text" id="task-input">
+          <ul class="params">
+            <li><input type="checkbox" id=""></li>
+            <li><input type="checkbox" id=""></li>
+            <li><input type="checkbox" id=""></li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,18 +1,57 @@
-a {
-    text-decoration: none;
-}
-
-h1 {
-    margin: 0;
-    text-align: center;
-}
+@import url(fonts.css);
 
 body {
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  font-family: "segoe_ui";
 }
 
 header {
-    background-color: #2d6d30;
-    font-weight: bold;
+  background: linear-gradient(
+    90deg,
+    rgb(132, 94, 219) 0%,
+    rgb(68, 46, 120) 100%
+  );
+}
+
+.desk-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 0px 2px 4.5px rgba(0, 0, 0, 0.35);
+}
+
+.desk-type {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.logo {
+  font-weight: bold;
+  color: rgb(212, 194, 34);
+  text-shadow: 0px 3px 4.5px rgba(0, 0, 0, 0.35);
+}
+
+.user {
+}
+
+.user__name {
+  color: #808;
+}
+
+.user__logout {
+}
+
+.content {
+  width: 900px;
+  margin: 0 auto;
+}
+
+.add {
+
+}
+
+#task-input {
+}
+
+input[type="checkbox"] {
+  
 }
