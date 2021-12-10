@@ -1,8 +1,8 @@
-@import url(fonts.css);
+/* @import url(fonts.css); */
 
 body {
   margin: 0;
-  font-family: "segoe_ui";
+  font-family: 'Segoe UI';
 }
 
 header {
@@ -45,13 +45,16 @@ header {
   margin: 0 auto;
 }
 
-.add {
+.add-task {
 
 }
 
 #task-input {
+
 }
 
 input[type="checkbox"] {
   
 }
+
+#add-btn {}
