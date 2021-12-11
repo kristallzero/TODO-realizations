@@ -1,8 +1,9 @@
-/* @import url(fonts.css); */
-
 body {
   margin: 0;
-  font-family: 'Segoe UI';
+}
+
+.wrapper {
+  font-family: "Segoe UI";
 }
 
 header {
@@ -11,50 +12,78 @@ header {
     rgb(132, 94, 219) 0%,
     rgb(68, 46, 120) 100%
   );
+  cursor: default;
+  user-select: none;
+}
+
+header > .content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.wrapper > .content {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .desk-title {
   font-size: 30px;
+  text-shadow: 0px 3px 2px rgba(0, 0, 0, 0.35);
+  color: #d6c527;
   font-weight: bold;
-  text-shadow: 0px 2px 4.5px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
+.desk-title:hover {
+  color: #ffe922;
+}
 .desk-type {
-  font-size: 20px;
-  font-weight: normal;
+  font-size: 17px;
 }
 
 .logo {
-  font-weight: bold;
-  color: rgb(212, 194, 34);
+  color: #d4c222;
   text-shadow: 0px 3px 4.5px rgba(0, 0, 0, 0.35);
+  font-size: 39px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 33px;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .user {
+  color: #e6d229;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  user-select: none;
 }
 
 .user__name {
-  color: #808;
+  color: #cb43c0;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  user-select: all;
 }
 
+.user__name:hover {
+  color: #e74dda;
+  cursor: pointer;
+}
 .user__logout {
+  color: #a1931d;
+  font-size: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  width: fit-content;
+  margin-left: auto;
 }
 
-.content {
-  width: 900px;
-  margin: 0 auto;
+.user__logout:hover {
+  color: #f5e12c;
 }
-
-.add-task {
-
-}
-
-#task-input {
-
-}
-
-input[type="checkbox"] {
-  
-}
-
-#add-btn {}
