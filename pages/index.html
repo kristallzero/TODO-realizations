@@ -13,93 +13,94 @@
   <div class="wrapper">
     <header>
       <div class="content">
-        <div class="desk-title">
+        <span class="desk-name">
           kristi's desk <span class="desk-type">(public)</span>
-        </div>
-        <span class="logo">SIMPLE TODO</span>
+        </span>
+        <a href="/" class="logo">SIMPLE TODO</a>
         <div class="user">
-          HI, <span class="user__name">KRISTI#0000</span>
-          <div class="user__logout">LOG OUT...</div>
+          HI, <span class="name">KRISTI#0000</span>
+          <div class="logout">LOG OUT...</div>
         </div>
       </div>
     </header>
 
     <div class="content">
       <div class="add-task">
-        <input type="text" id="task-input">
+        <input type="text" id="task-input" maxlength="40">
         <ul class="params">
-          <li><input type="checkbox" id="check-multi">Multi</li>
-          <li><input type="checkbox" id="check-important">Important</li>
-          <li><input type="checkbox" id="check-private">Private</li>
+          <li><label for="multi"><input type="checkbox" id="multi">Multi</label></li>
+          <li><label for="important"><input type="checkbox" id="important">Important</label></li>
+          <li><label for="private"><input type="checkbox" id="private">Private</label></li>
         </ul>
-        <button id="add-btn"><img src="#" class="add-btn__icon"></button>
+        <input type="button" id="add-btn">
       </div>
 
       <ul class="tasks">
-        <li class="task multi important">
-          <div class="task__title"><input type="checkbox" class="task__checkbox">
+        <li class="multi important">
+          <div class="title"><input type="checkbox">
             This is an example of important multi task
           </div>
           <ul class="subtasks">
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example subtask
             </li>
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example subtask
             </li>
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example subtask
             </li>
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example subtask
             </li>
-            <li class="subtask done"><input type="checkbox" class="task__checkbox">
-              This is an exaple donesubtask
+            <li class="done"><input type="checkbox">
+              This is an exaple done subtask
             </li>
           </ul>
-          <div class="task__data">11/11/21<br>kristi</div>
-          <button class="task__delete"><img src="#" class="task__trash-icon"></button>
+          <div class="data">11/11/21<br>kristi</div>
+          <button class="delete"><img src="#" class="trash-icon"></button>
         </li>
 
-        <li class="task important"><input type="checkbox" class="task__checkbox">
+        <li class="important"><input type="checkbox">
           This is an example of important task
-          <div class="task__data">10/11/21<br>kristi(private)</div>
-          <div class="task__delete"><img src="#" class="task__trash-icon"></div>
+          <div class="data">10/11/21<br>kristi(private)</div>
+          <button class="delete"><img src="#" class="trash-icon"></button>
         </li>
 
-        <li class="task multi">
-          <div class="task__title"><input type="checkbox" class="task__checkbox">
+        <li class="multi">
+          <div class="title"><input type="checkbox">
             This is an example of multi task</div>
           <ul class="subtasks">
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example subtask
             </li>
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example subtask
             </li>
-            <li class="subtask done"><input type="checkbox" class="task__checkbox">
+            <li class="done"><input type="checkbox">
               This is an example done subtask</li>
           </ul>
-          <div class="task__data">11/11/21<br>kristi</div>
-          <button class="task__delete"><img src="#" class="task__trash-icon"></button>
+          <div class="data">11/11/21<br>kristi</div>
+          <button class="delete"><img src="#" class="trash-icon"></button>
         </li>
 
-        <li class="task done"><input type="checkbox" class="task__checkbox">
+        <li class="done"><input type="checkbox">
           This is a done task
-          <div class="task__data">10/11/21<br>kristi</div>
-          <div class="task__delete"><img src="#" class="task__trash-icon"></div>
+          <div class="data">10/11/21<br>kristi</div>
+          <button class="delete"><img src="#" class="trash-icon"></button>
         </li>
-        <li class="task multi done">
-          <div class="task__title"><input type="checkbox" class="task__checkbox">
+
+        <li class="multi done">
+          <div class="title"><input type="checkbox">
             This is an exaple of multi task
           </div>
           <ul class="subtasks">
-            <li class="subtask"><input type="checkbox" class="task__checkbox">
+            <li><input type="checkbox">
               This is an example done subtask
             </li>
           </ul>
-          <div class="task__data">10/11/21<br>kristi</div>
-          <button class="task__delete"><img src="#" class="task__trash-icon"></button>
+          <div class="data">10/11/21<br>kristi</div>
+          <button class="delete"><img src="#" class="trash-icon"></button>
         </li>
       </ul>
     </div>

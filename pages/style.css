@@ -1,3 +1,16 @@
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="button"] {
+  background: none;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 body {
   margin: 0;
 }
@@ -16,21 +29,27 @@ header {
   user-select: none;
 }
 
-header > .content {
+.content {
   max-width: 1100px;
   margin: 0 auto;
-  display: flex;
+}
+
+header > .content {
+  max-width: 1100px;
   justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
+  display: flex;
+  padding: 0 10px 0 10px;
 }
 
 .wrapper > .content {
-  max-width: 1100px;
-  margin: 0 auto;
+  padding: 30px 80px 0 80px;
 }
 
-.desk-title {
+.wrapper > .content > * {
+  width: 100%;
+}
+
+.desk-name {
   font-size: 30px;
   text-shadow: 0px 3px 2px rgba(0, 0, 0, 0.35);
   color: #d6c527;
@@ -39,9 +58,10 @@ header > .content {
   cursor: pointer;
 }
 
-.desk-title:hover {
+.desk-name:hover {
   color: #ffe922;
 }
+
 .desk-type {
   font-size: 17px;
 }
@@ -55,6 +75,11 @@ header > .content {
   line-height: 33px;
   letter-spacing: 1px;
   text-align: center;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: #ffe922;
 }
 
 .user {
@@ -62,20 +87,21 @@ header > .content {
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
   font-size: 16px;
   user-select: none;
+  cursor: default;
 }
 
-.user__name {
+.user .name {
   color: #cb43c0;
   font-weight: bold;
   letter-spacing: 0.5px;
   user-select: all;
 }
 
-.user__name:hover {
+.user .name:hover {
   color: #e74dda;
   cursor: pointer;
 }
-.user__logout {
+.user .logout {
   color: #a1931d;
   font-size: 10px;
   text-decoration: underline;
@@ -84,6 +110,102 @@ header > .content {
   margin-left: auto;
 }
 
-.user__logout:hover {
+.user .logout:hover {
   color: #f5e12c;
+}
+
+.add-task {
+  border: 3px solid #5616a5;
+  border-radius: 40px;
+  box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.35);
+  height: 66px;
+  display: flex;
+  user-select: none;
+  margin-bottom: 20px;
+}
+
+#task-input {
+  border: none;
+  border-bottom: 3px solid #a8a8a8;
+  margin-left: 15px;
+  font-size: 30px;
+  padding-bottom: 0px;
+  height: 55px;
+  background: none;
+  flex-grow: 1;
+}
+
+#task-input:focus {
+  outline: 0;
+}
+
+.params {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.params li {
+  list-style: none;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+#add-btn {
+  display: inline;
+  border: 3px solid #5616a5;
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  padding: 0;
+  margin-left: 10px;
+  align-self: center;
+  background-image: url(/layout/Plus.png);
+}
+
+#add-btn:hover {
+  background-color: #5616a5;
+  background-image: url(/layout/Plus\ hover.png);
+  cursor: pointer;
+}
+
+.tasks {
+}
+
+.tasks > li {
+}
+
+.tasks input {
+}
+
+.title {
+}
+
+.subtasks {
+}
+
+.subtasks > li {
+}
+
+.data {
+}
+
+.delete {
+}
+
+.important {
+}
+
+.multi {
+}
+
+.multi .delete {
+}
+
+.trash-icon {
+}
+
+.done {
+}
+
+.done .trash-icon {
 }
