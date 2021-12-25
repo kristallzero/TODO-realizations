@@ -102,11 +102,12 @@ header > .content {
   text-transform: uppercase;
 }
 
-.user .name:hover {
+.name:hover {
   color: #e74dda;
   cursor: pointer;
 }
-.user .logout {
+
+.logout {
   color: #a1931d;
   font-size: 10px;
   text-decoration: underline;
@@ -115,7 +116,7 @@ header > .content {
   margin-left: auto;
 }
 
-.user .logout:hover {
+.logout:hover {
   color: #f5e12c;
 }
 
@@ -227,7 +228,7 @@ header > .content {
   line-height: 1;
 }
 
-.delete {
+.delete, .done > .delete:hover {
   border: none;
   background: url(/layout/delete_icon.png);
   cursor: pointer;
@@ -239,20 +240,11 @@ header > .content {
   left: 10px;
 }
 
-.done > .delete {
+.delete:hover, .done > .delete {
   background: url(/layout/delete_icon_hover.png);
   background-position: center;
 }
 
-.delete:hover {
-  background: url(/layout/delete_icon_hover.png);
-  background-position: center;
-}
-
-.done > .delete:hover {
-  background: url(/layout/delete_icon.png);
-  background-position: center;
-}
 .important {
   background: linear-gradient(0, #fedc45, #fca66f);
 }
@@ -262,11 +254,13 @@ li.multi {
   height: auto;
 }
 
-.multi .delete {
+.multi > .delete {
   bottom: 10px;
   border-radius: 0 30px 0 0;
 }
-
+.multi.done > .delete {
+  border-radius: 0 30px 0 0;
+}
 .done {
   color: #8e8e8e;
 }
