@@ -5,14 +5,18 @@ li {
   padding: 0;
 }
 
-input[type="button"] {
+input {
   background: none;
+}
+
+input[type="button"] {
   background-repeat: no-repeat;
   background-position: center;
 }
 
 body {
   margin: 0;
+  min-width: 680px;
 }
 
 .wrapper {
@@ -95,6 +99,7 @@ header > .content {
   font-weight: bold;
   letter-spacing: 0.5px;
   user-select: all;
+  text-transform: uppercase;
 }
 
 .user .name:hover {
@@ -160,6 +165,8 @@ header > .content {
   margin-left: 10px;
   align-self: center;
   background-image: url(/layout/Plus.png);
+  position: relative;
+  left: 2px;
 }
 
 #add-btn:hover {
@@ -169,43 +176,97 @@ header > .content {
 }
 
 .tasks {
+  border: 3px solid #7e32df;
+  border-radius: 33px;
+  box-shadow: 0px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+  padding: 10px;
 }
 
 .tasks > li {
+  border: 3px solid #732bce;
+  border-radius: 33px;
+  box-shadow: 0px 3px 4.5px 0.5px rgba(0, 0, 0, 0.35);
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  height: 33px;
 }
 
-.tasks input {
+.task-text {
+  flex-grow: 1;
+  font-size: 26px;
+}
+
+.task-text input {
+  width: 26px;
+  height: 26px;
 }
 
 .title {
+  font-weight: bold;
 }
 
 .subtasks {
+  margin-left: 30px;
 }
 
+.task-text,
+.title,
 .subtasks > li {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .data {
+  display: inline-block;
+  font-size: 18px;
+  color: #545454;
+  text-align: right;
+  line-height: 1;
 }
 
 .delete {
+  border: none;
+  background: url(/layout/delete_icon.png);
+  cursor: pointer;
+  width: 50px;
+  height: 53px;
+  border-radius: 0 33px 33px 0;
+  position: relative;
+  background-position: center;
+  left: 10px;
 }
 
+.done > .delete {
+  background: url(/layout/delete_icon_hover.png);
+  background-position: center;
+}
+
+.delete:hover {
+  background: url(/layout/delete_icon_hover.png);
+  background-position: center;
+}
+
+.done > .delete:hover {
+  background: url(/layout/delete_icon.png);
+  background-position: center;
+}
 .important {
+  background: linear-gradient(0, #fedc45, #fca66f);
 }
 
-.multi {
+li.multi {
+  align-items: flex-start;
+  height: auto;
 }
 
 .multi .delete {
-}
-
-.trash-icon {
+  bottom: 10px;
+  border-radius: 0 30px 0 0;
 }
 
 .done {
-}
-
-.done .trash-icon {
+  color: #8e8e8e;
 }
