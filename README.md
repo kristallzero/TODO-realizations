@@ -10,6 +10,6 @@ This is the first realization of the synced TODO list — Simple TODO
 - To update the TODO list, press the Update button
 
 # Starting up
-- `npm install` - install all dependencies
+- `npm install` / `npm i` - install all dependencies
 - `npm run start` - run server using node
 - `npm run dev` - run server using nodemon
