@@ -2,10 +2,10 @@
   "name": "simple_todo",
   "version": "1.0.0",
   "description": "Simple todo using node js, fs and http without express js",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node server.mjs",
+    "dev": "nodemon server.mjs"
   },
   "author": "kristi",
   "license": "ISC",
