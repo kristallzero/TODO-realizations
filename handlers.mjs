@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import { desks } from './server.mjs';
 
 var freeIds = {};
@@ -9,7 +9,7 @@ export const jsonHandler = (desk, data) => new Promise(resolve => {
     if (typeof data === 'number') resolve(desks[desk]);
     else resolve(postHandler(data));
   } else {
-    fs.readFile(path.resolve('files', 'json', desk), 'utf-8', (err, tasks) => {
+    fs.readFile(path.resolve('views', 'json', desk), 'utf-8', (err, tasks) => {
       if (err) resolve(401);
       else {
         tasks = JSON.parse(tasks);

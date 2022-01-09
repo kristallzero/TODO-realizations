@@ -1,6 +1,6 @@
-import * as http from 'http';
-import * as fs from 'fs';
-import * as path from 'path';
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
 import { jsonHandler } from './handlers.mjs';
 
 export const desks = {};
@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
       });
     } else {
       if (req.url === '/') req.url = '/index.html';
-      fs.readFile(path.resolve('files', req.url.slice(1)), (err, data) => {
+      fs.readFile(path.resolve('views', req.url.slice(1)), (err, data) => {
         if (err) { res.writeHead(404); res.end(); }
         else {
           const ext = path.extname(req.url).slice(1);

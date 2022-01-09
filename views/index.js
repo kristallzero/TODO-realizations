@@ -162,7 +162,7 @@ function checkboxEvent(checkbox, task, id) {
 }
 
 //* Doing checkbox event to subtask
-function subtaskCheckboxEvent(checkbox, subtask, id, taskId) { //TODO Add done sending
+function subtaskCheckboxEvent(checkbox, subtask, id, taskId) {
   const subtasks = subtask.parentElement;
   let fullDone;
   if (checkbox.checked) {
