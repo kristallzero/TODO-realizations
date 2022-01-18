@@ -165,14 +165,14 @@ header > .content {
   padding: 0;
   margin-left: 10px;
   align-self: center;
-  background-image: url(/Plus.png);
+  background-image: url(img/Plus.png);
   position: relative;
   left: 2px;
 }
 
 #add-btn:hover {
   background-color: #5616a5;
-  background-image: url(/Plus_hover.png);
+  background-image: url(img/Plus_hover.png);
   cursor: pointer;
 }
 
@@ -230,7 +230,7 @@ header > .content {
 
 .delete, .done > .delete:hover {
   border: none;
-  background: url(/delete_icon.png);
+  background: url(img/delete_icon.png);
   cursor: pointer;
   width: 50px;
   height: 53px;
@@ -241,7 +241,7 @@ header > .content {
 }
 
 .delete:hover, .done > .delete {
-  background: url(/delete_icon_hover.png);
+  background: url(img/delete_icon_hover.png);
   background-position: center;
 }
 

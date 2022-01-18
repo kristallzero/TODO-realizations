@@ -6,8 +6,7 @@
       "important": true,
       "private": false,
       "done": false,
-      "date": "11/11/2021",
-      "id": 0
+      "date": "11/11/2021"
     },
     "data": {
       "title": "0",
@@ -42,8 +41,7 @@
       "important": true,
       "private": true,
       "done": false,
-      "date": "10/11/2021",
-      "id": 1
+      "date": "10/11/2021"
     },
     "data": "1"
   },
@@ -54,8 +52,7 @@
       "important": false,
       "private": false,
       "done": false,
-      "date": "11/11/2021",
-      "id": 2
+      "date": "11/11/2021"
     },
     "data": {
       "title": "2",
@@ -82,8 +79,7 @@
       "important": false,
       "private": false,
       "done": true,
-      "date": "10/11/2021",
-      "id": 3
+      "date": "10/11/2021"
     },
     "data": "3"
   },
@@ -94,8 +90,7 @@
       "important": false,
       "private": false,
       "done": true,
-      "date": "10/11/21",
-      "id": 4
+      "date": "10/11/21"
     },
     "data": {
       "title": "4",
