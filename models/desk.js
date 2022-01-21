@@ -17,8 +17,9 @@ export const put = task => new Promise(async (res, rej) => {
     task.metadata.important
       ? 0
       : desk.findIndex(el => !el.metadata.important);
-  desk.splice(order, 0, task);
 
+  if (order === -1) desk.push(task);
+  else desk.splice(order, 0, task);
   fs.writeFile(path.resolve('data', 'desk.json'), JSON.stringify(desk), err => err ? rej(err) : res(String(order)));
 });
 

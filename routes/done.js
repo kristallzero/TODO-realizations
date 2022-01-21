@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { done, doneSub } from "../models/desk.mjs";
+import { done, doneSub } from "../models/desk.js";
 
 export const router = Router();
 

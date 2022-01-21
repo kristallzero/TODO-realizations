@@ -28,7 +28,7 @@ if (task_board.children.length)
 
 
 function newTaskHandler() {
-  if (task_input.value) { // If task text is not empty
+  if (task_input.value.trim()) { // If task text is not empty
     document.body.style.cursor = "progress";
     const date = new Date();
     const task = {
@@ -43,13 +43,13 @@ function newTaskHandler() {
       data: task_input.value
     }
     fetch('add', { method: 'POST', body: JSON.stringify(task), headers: { 'content-type': 'application/json' } })
-      .then(res => res.ok ? res.text() : Promise.reject()).then((data) => {
+      .then(res => res.text())
+      .then((data) => {
         task.metadata.order = +data;
         addTaskHandler(task);
         task_input.value = '';
         document.body.style.cursor = "auto";
       })
-    //.catch(() => task_board.innerHTML = `<h1>Oh No... Server Error! Please, reload page!</h1>`);
   }
 }
 
@@ -69,7 +69,7 @@ function taskEventsRouter(e, task) {
 function checkboxHandler(checkbox, task) {
   const order = Array.from(task_board.children).findIndex(el => el === task);
   fetch(`/done/${order}?done=${checkbox.checked}`, { method: 'PATCH' })
-    .then(res => res.ok ? res.text() : Promise.reject())
+    .then(res => res.text())
     .then(newOrder => {
       // Changing substasks checkboxes
       if (task.classList.contains('multi'))
@@ -92,7 +92,7 @@ function subCheckboxHandler(checkbox, task, subtask) {
   const subOrder = Array.from(subTasks.children).findIndex(el => el === subtask);
 
   fetch(`/done/${order}/${subOrder}?done=${checkbox.checked}`, { method: 'PATCH' })
-    .then(res => res.ok ? res.text() : Promise.reject())
+    .then(res => res.text())
     .then(newOrder => {
       subTasks.removeChild(subtask);
 
@@ -101,7 +101,11 @@ function subCheckboxHandler(checkbox, task, subtask) {
 
       subTasks.insertBefore(subtask, subTasks.children[+newOrder]);
 
-      if (Array.from(subTasks.children).every(el => el.classList.contains('done'))) checkboxHandler(task.querySelector('input', task));
+      if (Array.from(subTasks.children).every(el => el.classList.contains('done'))) {
+        const taskCheckbox = task.querySelector('input');
+        taskCheckbox.checked = true;
+        checkboxHandler(taskCheckbox, task);
+      }
     });
 }
 
@@ -109,7 +113,7 @@ function deleteHandler(task) {
   const order = Array.from(task_board.children).findIndex(el => el === task);
 
   fetch(`/delete/${order}`, { method: 'DELETE' })
-    .then(res => res.ok ? task_board.removeChild(task) : Promise.reject);
+    .then(() => task_board.removeChild(task));
 }
 
 //* Task add

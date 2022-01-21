@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { put } from "../models/desk.mjs";
+import { put } from "../models/desk.js";
 
 export const router = Router();
 

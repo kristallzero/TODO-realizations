@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteTask } from "../models/desk.mjs";
+import { deleteTask } from "../models/desk.js";
 
 export const router = Router();
 
