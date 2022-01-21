@@ -1,7 +1,7 @@
-# My first node.js project: Simple TODO
-This project was written without express js, only HTTP and fs modules. 
+# Simple TODO
+This project was written with express js 
 
-This is the first realization of the synced TODO list — Simple TODO
+This is my first implementation of a synced TODO list — Simple TODO
 
 # Features 
 - Every task will be saved on the server-side
