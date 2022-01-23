@@ -12,3 +12,5 @@ router.post('/', async (req, res) => {
     res.status(500).end(e);
   }
 });
+
+export default router;

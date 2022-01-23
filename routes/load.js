@@ -12,4 +12,6 @@ router.get('/', async (req, res) => {
     console.log(e);
     res.status(500).send(e);
   }
-})
+});
+
+export default router;

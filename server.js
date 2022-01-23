@@ -2,10 +2,10 @@ import { resolve } from 'path';
 import express from "express";
 import exphbs from "express-handlebars";
 
-import { router as loadRoute } from './routes/load.js';
-import { router as addRoute } from './routes/add.js';
-import { router as doneRoutes } from './routes/done.js';
-import { router as deleteRoute } from './routes/delete.js';
+import loadRoute from './routes/load.js';
+import addRoute from './routes/add.js';
+import doneRoutes from './routes/done.js';
+import deleteRoute from './routes/delete.js';
 
 const app = express();
 const hbs = exphbs.create({

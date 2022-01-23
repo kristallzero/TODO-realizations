@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "dev": "nodemon server.mjs",
-    "test": "nodemon --ext mjs,js,hbs server.mjs"
+    "dev": "nodemon --ext js,hbs server.js"
   },
   "author": "kristi",
   "license": "ISC",

@@ -20,3 +20,5 @@ router.patch('/:order/:subOrder', async (req, res) => {
     res.status(500).send(e);
   }
 });
+
+export default router;
