@@ -4,7 +4,7 @@
   "description": "Simple todo using node js, fs and http without express js",
   "type": "module",
   "scripts": {
-    "start": "node server.mjs",
+    "start": "node server.js",
     "dev": "nodemon --ext js,hbs server.js"
   },
   "author": "kristi",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "express": "^4.17.2",
-    "express-handlebars": "^6.0.2"
+    "express-handlebars": "^6.0.2",
+    "mongoose": "^6.1.8"
   }
 }

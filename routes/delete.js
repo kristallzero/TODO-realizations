@@ -1,11 +1,14 @@
 import { Router } from "express";
-import { deleteTask } from "../models/desk.js";
+import Task from "../models/task.js";
 
-export const router = Router();
+const router = Router();
 
-router.delete('/:order', async(req, res) => {
+router.delete('/:id', async(req, res) => {
   try {
-    await deleteTask(req.params.order);
+    const user = await req.user.populate('desk');
+    user.deleteTask(req.params.id);
+    
+    await Task.deleteOne({_id: req.params.id});
     res.sendStatus(200);
   } catch (e) {
     console.log(e);

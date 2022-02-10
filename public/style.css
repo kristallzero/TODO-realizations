@@ -226,6 +226,11 @@ header > .content {
   color: #545454;
   text-align: right;
   line-height: 1;
+  white-space: nowrap;
+}
+
+.delete {
+  min-width: 50px;
 }
 
 .delete, .done > .delete:hover {

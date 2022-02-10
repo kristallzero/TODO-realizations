@@ -1,12 +1,17 @@
 import { Router } from "express";
+import Task from "../models/task.js";
 
-import { put } from "../models/desk.js";
-
-export const router = Router();
+const router = Router();
 
 router.post('/', async (req, res) => {
   try {
-    res.send(await put(req.body));
+    const task = new Task(req.body);
+    await task.save();
+
+    const user = await req.user.populate('desk');
+    const { order, save } = user.addTask(task);
+    await save;
+    res.json({id: task._id, order});
   } catch (e) {
     console.log(e);
     res.status(500).end(e);

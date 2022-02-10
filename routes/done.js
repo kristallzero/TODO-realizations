@@ -1,20 +1,33 @@
 import { Router } from "express";
-import { done, doneSub } from "../models/desk.js";
+import Task from '../models/task.js';
 
-export const router = Router();
+const router = Router();
 
-router.patch('/:order', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
-    res.send(await done(req.params.order, req.query.done === 'true'));
+    const done = req.query.done === 'true';
+    
+    const user = await req.user.populate('desk');
+    const { order, save } = user.doneTask(req.params.id, done);
+    await save;
+
+    const task = await Task.findById(req.params.id);
+    await task.setDone(done);
+    
+    res.send(String(order));
   } catch (e) {
     console.log(e);
     res.status(500).send(e);
   }
 });
 
-router.patch('/:order/:subOrder', async (req, res) => {
+router.patch('/:id/:subOrder', async (req, res) => {
   try {
-    res.send(await doneSub(req.params.order, req.params.subOrder, req.query.done === 'true'))
+    const done = req.query.done === 'true';
+    const task = await Task.findById(req.params.id);
+    const {order, save} = task.setSubtaskDone(done, req.params.subOrder);
+    await save;
+    res.send(String(order));
   } catch (e) {
     console.log(e);
     res.status(500).send(e);

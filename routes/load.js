@@ -1,15 +1,11 @@
 import { Router } from "express";
 
-import { get } from "../models/desk.js";
-
-export const router = Router();
-
+const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    res.render('desk', { tasks: await get() });
+    res.render('desk', await req.user.populate('desk').select('user desk').lean());
   } catch (e) {
-    console.log(e);
     res.status(500).send(e);
   }
 });
