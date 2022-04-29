@@ -1,12 +1,13 @@
 <header>
   <div class="content">
     <span class="desk-name">
-      kristi's desk <span class="desk-type">(public)</span>
+      {{desk.settings.title}} <span class="desk-type">({{#if desk.settings.private}}private{{else}}public{{/if}})</span>
     </span>
     <a href="/" class="logo">SIMPLE TODO</a>
     <div class="user">
-      HI, <span class="name">{{user.id}}</span>
+      HI, <span class="name">{{user}}</span>
       <div class="logout">LOG OUT...</div>
     </div>
+    {{> settings}}
   </div>
 </header>

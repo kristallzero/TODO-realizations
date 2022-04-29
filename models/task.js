@@ -1,3 +1,4 @@
+//! OUTDATED!!!
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
@@ -42,24 +43,25 @@ const taskSchema = new Schema({
   }
 });
 
-taskSchema.methods = {
-  setDone: function (done) {
-    this.metadata.done = done;
-    return this.save();
-  },
-  setSubtaskDone: function (done, subOrder) {
-    if (subOrder >= this.data.subtasks.length) return;
+// taskSchema.methods = {
+//   setDone: function (done) {
+//     this.metadata.done = done;
+//     return this.save();
+//   },
+//   setSubtaskDone: function (done, subOrder) {
+//     if (subOrder >= this.data.subtasks.length) return;
 
-    const order =
-      done
-        ? this.data.subtasks.findIndex(sub => sub.done)
-        : 0;
+//     const order =
+//       done
+//         ? this.data.subtasks.findIndex(sub => sub.done)
+//         : 0;
     
-    const task = this.data.subtasks.splice(subOrder, 1)[0];
-    this.data.subtasks.splice(order, 0, task);
-    task.done = done;
+//     const task = this.data.subtasks.splice(subOrder, 1)[0];
+//     this.data.subtasks.splice(order, 0, task);
+//     task.done = done;
 
-    return { order, save: this.save() };
-  }
-}
+//     return { order, save: this.save() };
+//   }
+// }
+
 export default model('Task', taskSchema);

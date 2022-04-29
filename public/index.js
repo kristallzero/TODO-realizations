@@ -1,10 +1,16 @@
+"use strict"
 //* Task input
-const add_btn = document.getElementById('add-btn');
-const task_input = document.getElementById('task-input');
-const properties = {
-  multi: document.getElementById('multi'),
-  important: document.getElementById('important'),
-  private: document.getElementById('private')
+const input_block = document.querySelector('.add-task');
+const deskId = input_block.querySelector('.id').value;
+
+const addTask = {
+  addBtn: document.getElementById('add-btn'),
+  taskInput: document.getElementById('task-input'),
+  properties: {
+    multi: document.getElementById('multi'),
+    important: document.getElementById('important'),
+    private: document.getElementById('private')
+  }
 };
 
 //* Tasks
@@ -20,8 +26,8 @@ const toDate = date => new Intl.DateTimeFormat('en-UK', {
 }).format(new Date(date));
 
 //* Add task events
-add_btn.onclick = newTaskHandler;
-task_input.parentElement.onkeyup = e => { if (e.key === 'Enter') newTaskHandler() };
+addTask.addBtn.onclick = newTaskHandler;
+addTask.taskInput.parentElement.onkeyup = e => { if (e.key === 'Enter') newTaskHandler() };
 
 if (task_board.children.length)
   for (let i = 0; i < task_board.children.length; i++) {
@@ -41,25 +47,25 @@ if (task_board.children.length)
   }
 
 function newTaskHandler() {
-  if (task_input.value.trim()) { // If task text is not empty
+  if (addTask.taskInput.value.trim()) { // If task text is not empty
     document.body.style.cursor = "progress";
     const task = {
       metadata: {
         author: "kristi#0000",
         multi: false, //TODO multi
-        important: properties.important.checked,
-        private: properties.private.checked,
+        important: addTask.properties.important.checked,
+        private: addTask.properties.private.checked,
       },
-      data: { title: task_input.value }
+      data: { title: addTask.taskInput.value }
     }
-    fetch('add', { method: 'POST', body: JSON.stringify(task), headers: { 'content-type': 'application/json' } })
+    fetch(`add/${deskId}`, { method: 'POST', body: JSON.stringify(task), headers: { 'content-type': 'application/json' } })
       .then(res => res.json())
       .then(({ id, order }) => {
         task.metadata.order = order;
         addTaskHandler(task, id);
-        task_input.value = '';
+        addTask.taskInput.value = '';
         document.body.style.cursor = "auto";
-      })
+      });
   }
 }
 
@@ -77,7 +83,7 @@ function taskEventsRouter(e, task, id) {
 }
 
 function checkboxHandler(checkbox, task, id) {
-  fetch(`/done/${id}?done=${checkbox.checked}`, { method: 'PATCH' })
+  fetch(`/done/${deskId}/${id}?done=${checkbox.checked}`, { method: 'PATCH' })
     .then(res => res.text())
     .then(newOrder => {
       // Changing substasks checkboxes
@@ -96,15 +102,14 @@ function subCheckboxHandler(checkbox, task, subtask, id) {
   const subTasks = task.querySelector('.subtasks');
   const subOrder = Array.from(subTasks.children).findIndex(el => el === subtask);
 
-  fetch(`/done/${id}/${subOrder}?done=${checkbox.checked}`, { method: 'PATCH' })
+  fetch(`/done/${deskId}/${id}/${subOrder}?done=${checkbox.checked}`, { method: 'PATCH' })
     .then(res => res.text())
     .then(newOrder => {
       if (!checkbox.checked) checkAllSubtasks(subTasks, task, id, false);
       subTasks.removeChild(subtask);
       subtask.classList.toggle('done');
-      console.log(+newOrder);
       subTasks.insertBefore(subtask, subTasks.children[+newOrder]);
-      if(checkbox.checked) checkAllSubtasks(subTasks, task, id, true);
+      if (checkbox.checked) checkAllSubtasks(subTasks, task, id, true);
     });
 }
 
@@ -118,9 +123,8 @@ function checkAllSubtasks(subtasks, task, id, checked) {
 }
 
 const deleteHandler = (task, id) =>
-  fetch(`/delete/${id}`, { method: 'DELETE' })
+  fetch(`/delete/${deskId}/${id}`, { method: 'DELETE' })
     .then(() => task_board.removeChild(task));
-
 
 //* Task add
 function addTaskHandler(task, id) {
@@ -163,3 +167,107 @@ function addTaskHandler(task, id) {
     task_board.children[task.metadata.order]
   );
 }
+
+//*Settings
+const settings = document.querySelector('.settings');
+
+const editableDesk = () => settings.querySelector('#editable-desk input').checked;
+settings.querySelector('#private-desk input').checked = document.querySelector('.desk-type').textContent === '(private)';
+
+function changeEditable() {
+  Array
+    .from(task_board.children)
+    .forEach(el => {
+      const inputs = el.querySelectorAll('input:not(.id)');
+      if (editableDesk()) {
+        inputs.forEach(input => {
+          if (input.classList.contains('delete')) input.type = 'button';
+          else input.disabled = false;
+        });
+        input_block.style.display = '';
+      } else {
+        inputs.forEach(input => {
+          if (input.classList.contains('delete')) input.type = 'hidden';
+          else input.disabled = true;
+        });
+        input_block.style.display = 'none';
+      }
+    });
+}
+changeEditable();
+
+let editing = false;
+let editingDesk;
+
+document.querySelector('.desk-name').onclick = () => settings.classList.remove('hide');
+document.querySelector('.wrapper > .content').onclick = () => settings.classList.add('hide');
+
+settings.querySelector('.desks input').onkeyup = e => {
+  if (e.key === 'Enter') addDesk(e.target);
+}
+document.querySelector('.desks [type="button"]').onclick = () => addDesk(document.querySelector('.desks input'));
+
+function addDesk(input) {
+  const deskName = input.value;
+  if (deskName.trim().length) {
+    if (editing) {
+      fetch(`updatePreference/title/${deskId}?title=${deskName}`, { method: 'POST' })
+        .then(() => {
+          editingDesk.children[0].childNodes[0].textContent = deskName;
+          settings.querySelector('.desks > ul').prepend(editingDesk);
+          document.querySelector('.desk-name').childNodes[0].textContent = deskName + ' ';
+          input.value = '';
+        });
+    } else {
+      fetch(`create?deskTitle=${deskName}`, { method: 'POST' })
+        .then(res => res.json())
+        .then(({ id }) => {
+          const desk = document.createElement('li');
+          desk.innerHTML = `<a class="desk" href=${id}>${deskName} (private)</a>`;
+          const deleteBtn = document.createElement('input');
+          deleteBtn.classList.add('delete-desk');
+          deleteBtn.type = 'button';
+          deleteBtn.value = 'delete';
+          desk.appendChild(deleteBtn);
+          settings.querySelector('.desks > ul').appendChild(desk);
+          input.value = '';
+        });
+    }
+  }
+}
+
+settings.querySelector('.edit-desk').onclick = () => {
+  editingDesk = settings.querySelector('.desks li');
+  settings.querySelector('.desks ul').removeChild(editingDesk);
+  settings.querySelector('.desks input').value = editingDesk.children[0].childNodes[0].textContent;
+  editing = true;
+};
+
+Array.from(settings.querySelector('.desk-settings').children)
+  .forEach(preference => {
+    preference.onclick = e => {
+      const input = preference.querySelector('input');
+      if (e.target !== input) input.checked = !input.checked;
+      const { id } = preference;
+      const { checked } = input;
+      fetch(`/updatePreference/${id}/${deskId}?checked=${checked}`, { method: 'POST' })
+        .then(() => {
+          if (id === 'private-desk') {
+            settings.querySelector('.desks li span').textContent = ` (${checked ? 'private' : 'public'})`;
+            document.querySelector('.desk-type').textContent = `(${checked ? 'private' : 'public'})`;
+          } else changeEditable();
+        });
+    }
+  });
+
+settings.querySelectorAll('.delete-desk')
+  .forEach(el => el.onclick = () => deleteDeskHandler(el.parentElement, el.previousElementSibling.href.split('/').slice(-1)));
+
+settings.querySelector('.delete-desk').onclick = () => location.href = 'http://localhost:3000/';
+
+function deleteDeskHandler(desk, id) {
+  fetch(`/updatePreference/delete/${id}`, { method: 'DELETE' })
+    .then(() => {
+      settings.querySelector('.desks ul').removeChild(desk);
+    });
+} 

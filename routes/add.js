@@ -1,20 +1,17 @@
 import { Router } from "express";
-import Task from "../models/task.js";
 
 const router = Router();
 
-router.post('/', async (req, res) => {
+router.post('/:id', async(req, res) => {
   try {
-    const task = new Task(req.body);
-    await task.save();
-
-    const user = await req.user.populate('desk');
-    const { order, save } = user.addTask(task);
+    const user = await req.user.populate('desks');
+    const desk = user.desks.find(desk => desk._id == req.params.id);
+    if (!desk) return res.status(404).end('Desk not found');
+    const {id, order, save} = desk.createTask(req.body);
     await save;
-    res.json({id: task._id, order});
+    res.json({id: id.toString(), order});
   } catch (e) {
-    console.log(e);
-    res.status(500).end(e);
+    res.status(500).end('Sorry! Server Error! We will fix it soon');
   }
 });
 

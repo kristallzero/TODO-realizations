@@ -1,6 +1,6 @@
 <ul class="tasks" id="tasks">
-  {{#if desk.length}}
-  {{#each desk}}
+  {{#if desk.tasks.length}}
+  {{#each desk.tasks}}
   <li class="{{#if metadata.important}}important{{/if}}
   {{#if metadata.multi}}multi{{/if}}
   {{#if metadata.done}}done{{/if}}">
@@ -15,6 +15,7 @@
         <li {{#if done}}class="done" {{/if}}>
           <input type="checkbox" {{#if done}}class="done" {{/if}}>
           {{data}}
+          <input type="hidden" class="id" value="{{_id}}">
         </li>
         {{/each}}
       </ul>
