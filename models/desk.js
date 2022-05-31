@@ -51,7 +51,10 @@ const deskSchema = new Schema({
         },
         subtasks: [
           {
-            done: Boolean,
+            done: {
+              type: Boolean,
+              default: false
+            },
             data: String
           }
         ]
@@ -63,9 +66,11 @@ const deskSchema = new Schema({
 deskSchema.methods = {
   createTask: function (task) {
     let order =
-      task.metadata.important || !this.tasks
-        ? 0
-        : this.tasks.findIndex(element => !element.metadata.important || element.metadata.done);
+      this.tasks
+        ? task.metadata.important
+          ? this.tasks.findIndex(el => !el.metadata.important || el.metadata.done)
+          : this.tasks.findIndex(el => el.metadata.done)
+        : 0;
     if (order === -1) order = this.tasks.length;
 
     this.tasks.splice(order, 0, task);
@@ -81,10 +86,28 @@ deskSchema.methods = {
         : this.tasks[taskIndex].metadata.important
           ? 0
           : this.tasks.findIndex(task => !task.metadata.important || task.metadata.done);
-    const task = this.tasks.splice(taskIndex, 1)[0];
     if (order === -2) order = this.tasks.length;
+
+    const task = this.tasks.splice(taskIndex, 1)[0];
     this.tasks.splice(order, 0, task);
     task.metadata.done = done;
+    return { order, save: this.save() };
+  },
+  setSubDone: function (taskId, subtaskId, done) {
+    const task = this.tasks.find(task => task._id.toString() === taskId);
+    if (!task) return;
+
+    const subtaskIndex = task.data.subtasks.findIndex(subtask => subtask._id.toString() === subtaskId);
+    if (subtaskIndex === -1) return;
+
+    let order =
+      done
+        ? task.data.subtasks.length - 1
+        : 0;
+
+    const subtask = task.data.subtasks.splice(subtaskIndex, 1)[0];
+    task.data.subtasks.splice(order, 0, subtask);
+    subtask.done = done;
     return { order, save: this.save() };
   }
 }

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import Desk from "../models/desk.js";
 
 const router = Router();
 
@@ -40,6 +41,7 @@ router.delete('/delete/:id', async (req, res) => {
     if (deskIndex === -1) return res.status(404).end('Desk not found');
     user.desks.splice(deskIndex, 1);
     await user.save();
+    await Desk.findByIdAndDelete(req.params.id);
     res.end();
   } catch (e) {
     console.log(e);

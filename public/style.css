@@ -33,11 +33,9 @@ body {
 }
 
 header {
-  background: linear-gradient(
-    90deg,
-    rgb(132, 94, 219) 0%,
-    rgb(68, 46, 120) 100%
-  );
+  background: linear-gradient(90deg,
+      rgb(132, 94, 219) 0%,
+      rgb(68, 46, 120) 100%);
   cursor: default;
   user-select: none;
 }
@@ -47,7 +45,7 @@ header {
   margin: 0 auto;
 }
 
-header > .content {
+header>.content {
   max-width: 1100px;
   justify-content: space-between;
   display: flex;
@@ -55,11 +53,11 @@ header > .content {
   position: relative;
 }
 
-.wrapper > .content {
+.wrapper>.content {
   padding: 30px 80px 0 80px;
 }
 
-.wrapper > .content > * {
+.wrapper>.content>* {
   width: 100%;
 }
 
@@ -152,7 +150,7 @@ header > .content {
   border-bottom: 13px solid #805cd6;
 }
 
-.settings > * {
+.settings>* {
   border: 2px solid #000;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -166,7 +164,7 @@ header > .content {
   margin-bottom: 5px;
 }
 
-.add > [type="text"] {
+.add>[type="text"] {
   flex-grow: 1;
   border: none;
   border-bottom: 2px solid #ffe922;
@@ -174,11 +172,11 @@ header > .content {
   font-size: 18px;
 }
 
-.add > [type="text"]:focus {
+.add>[type="text"]:focus {
   outline: none;
 }
 
-.add > [type="button"] {
+.add>[type="button"] {
   border: 2px solid #000;
   border-radius: 50%;
   width: 26px;
@@ -189,7 +187,7 @@ header > .content {
   background: url("/img/settings_plus.png") center no-repeat;
 }
 
-.add > [type="button"]:hover {
+.add>[type="button"]:hover {
   background-color: #ffe922;
   border: #ffe922;
   box-shadow: 0px 1px 1.5px #ffe922;
@@ -241,6 +239,16 @@ header > .content {
   box-shadow: 0px 1px 1.5px #ffe922;
 }
 
+.preference {
+  cursor: pointer;
+  
+}
+
+.preference:hover {
+  background: #a789cc;
+  border-radius: 7px;
+}
+
 .error {
   color: #f00;
 }
@@ -249,10 +257,14 @@ header > .content {
   border: 3px solid #5616a5;
   border-radius: 40px;
   box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.35);
-  height: 66px;
-  display: flex;
+
   user-select: none;
   margin-bottom: 20px;
+}
+
+.flex {
+  display: flex;
+  height: 66px;
 }
 
 #task-input {
@@ -301,6 +313,26 @@ header > .content {
   cursor: pointer;
 }
 
+.add-task__subtasks {
+  margin-left: 30px;
+  margin-right: 70px;
+  margin-bottom: 30px;
+}
+
+.subtask__input {
+  border: none;
+  border-bottom: 3px solid #a8a8a8;
+  font-size: 20px;
+  padding-bottom: 0px;
+  background: none;
+  height: 30px;
+  width: 100%;
+}
+
+.subtask__input:focus {
+  outline: 0;
+}
+
 .tasks {
   border: 3px solid #7e32df;
   border-radius: 33px;
@@ -308,7 +340,7 @@ header > .content {
   padding: 10px;
 }
 
-.tasks > li {
+.tasks>li {
   border: 3px solid #732bce;
   border-radius: 33px;
   box-shadow: 0px 3px 4.5px 0.5px rgba(0, 0, 0, 0.35);
@@ -339,7 +371,7 @@ header > .content {
 
 .task-text,
 .title,
-.subtasks > li {
+.subtasks>li {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -354,12 +386,25 @@ header > .content {
   white-space: nowrap;
 }
 
+.edit-task {
+  border: none;
+  border-radius: 10px;
+  color: #272727;
+  
+}
+
+.edit-task:hover {
+  cursor: pointer;
+  background-color: #ffe922;
+  box-shadow: 0px 1px 1.5px #ffe922;
+}
+
 .delete {
   min-width: 50px;
 }
 
 .delete,
-.done > .delete:hover {
+.done>.delete:hover {
   border: none;
   background: url(img/delete_icon.png);
   cursor: pointer;
@@ -372,7 +417,7 @@ header > .content {
 }
 
 .delete:hover,
-.done > .delete {
+.done>.delete {
   background: url(img/delete_icon_hover.png);
   background-position: center;
 }
@@ -386,13 +431,15 @@ li.multi {
   height: auto;
 }
 
-.multi > .delete {
+.multi>.delete {
   bottom: 10px;
   border-radius: 0 30px 0 0;
 }
-.multi.done > .delete {
+
+.multi.done>.delete {
   border-radius: 0 30px 0 0;
 }
+
 .done {
   color: #8e8e8e;
 }
