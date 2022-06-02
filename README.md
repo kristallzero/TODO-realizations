@@ -11,9 +11,12 @@ This is my first implementation of a synced TODO list — Simple TODO
 # Starting up
 - `npm install` / `npm i` - install all dependencies
 - Before starting server, please create file index.js in the folder keys and type that keys:<br>
-`export default { ` <br>
-`MONGODB: <MongoDB database url>,`<br>
-`defaultUserID: <After first startup, new user will be created, insert here his ID> `<br>
-`}`
+```js
+export default {
+  MONGODB: 'MongoDB database url',
+  defaultUserID: 'After first startup, new user will be created, insert here his ID'
+}
+```
+
 - `npm run start` - run server using node
 - `npm run dev` - run server using nodemon (hot rebuild)
