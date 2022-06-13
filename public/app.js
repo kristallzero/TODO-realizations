@@ -1,75 +1,32 @@
 "use strict"
-//* Task input
-const input_block = document.querySelector('.add-task');
-const deskId = input_block.querySelector('.id').value;
 
-const addTask = {
-  addBtn: document.getElementById('add-btn'),
-  taskInput: document.getElementById('task-input'),
-  properties: {
-    multi: document.getElementById('multi'),
-    important: document.getElementById('important'),
-    private: document.getElementById('private')
-  },
-  subtasks: document.querySelector('.add-task__subtasks')
-};
 
 //* Tasks
-const task_board = document.getElementById('tasks');
+
 
 //* Date formatting
-const toDate = date => new Intl.DateTimeFormat('en-UK', {
-  day: '2-digit',
-  month: 'long',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit'
-}).format(new Date(date));
 
 //* Add task events
-addTask.addBtn.onclick = newTaskHandler;
-addTask.taskInput.parentElement.onkeyup = e => { if (e.key === 'Enter') newTaskHandler() };
 
-if (task_board.children.length)
-  for (let i = 0; i < task_board.children.length; i++) {
-    const task = task_board.children[i];
-    //Tasks checkboxes status set
-    task.querySelector('input').checked = task.classList.contains('done');
-    // Subcheckboxes status set
-    if (task.classList.contains('multi'))
-      for (let j = 0; j < task.querySelector('.subtasks').children.length; j++) {
-        const subtask = task.querySelector('.subtasks').children[j];
-        subtask.querySelector('input').checked =
-          task.classList.contains('done') || subtask.classList.contains('done')
-      }
-    task.querySelectorAll('.date').forEach(date => date.textContent = toDate(date.textContent));
-    // Add event router
-    task.onclick = e => taskEventsRouter(e, task, task.querySelector('.delete').previousElementSibling.value);
-  }
 
-function newTaskHandler() {
-  if (addTask.taskInput.value.trim()) { // If task text is not empty
-    document.body.style.cursor = "progress";
-    const task = {
-      metadata: {
-        author: "kristi#0000",
-        multi: addTask.properties.multi.checked,
-        important: addTask.properties.important.checked,
-        private: addTask.properties.private.checked,
-      },
-      data: { title: addTask.taskInput.value }
-    };
-    if (addTask.properties.multi.checked) getSubtasks(task);
-    fetch(`add/${deskId}`, { method: 'POST', body: JSON.stringify(task), headers: { 'content-type': 'application/json' } })
-      .then(res => res.json())
-      .then(({ id, order }) => {
-        task.metadata.order = order;
-        addTaskHandler(task, id);
-        addTask.taskInput.value = '';
-        document.body.style.cursor = "auto";
-      });
-  }
-}
+// if (task_board.children.length)
+//   for (let i = 0; i < task_board.children.length; i++) {
+//     const task = task_board.children[i];
+//     //Tasks checkboxes status set
+//     task.querySelector('input').checked = task.classList.contains('done');
+//     // Subcheckboxes status set
+//     if (task.classList.contains('multi'))
+//       for (let j = 0; j < task.querySelector('.subtasks').children.length; j++) {
+//         const subtask = task.querySelector('.subtasks').children[j];
+//         subtask.querySelector('input').checked =
+//           task.classList.contains('done') || subtask.classList.contains('done')
+//       }
+//     task.querySelectorAll('.date').forEach(date => date.textContent = toDate(date.textContent));
+//     // Add event router
+//     task.onclick = e => taskEventsRouter(e, task, task.querySelector('.delete').previousElementSibling.value);
+//   }
+
+
 
 
 function taskEventsRouter(e, task, id) {
@@ -196,61 +153,6 @@ function addTaskHandler(task, id) {
   );
 }
 
-//* Subtasks input
-if (addTask.properties.multi.checked) addTask.subtasks.classList.remove('hide');
-
-addTask.properties.multi.onclick = () => {
-  if (addTask.properties.multi.checked) addTask.subtasks.classList.remove('hide');
-  else addTask.subtasks.classList.add('hide');
-}
-
-
-for (let i = 0; i < addTask.subtasks.children.length; i++) {
-  const subtask = addTask.subtasks.children[i];
-  subtask.onkeyup = (e) => subtaskInputHandler(subtask, e);
-}
-
-function createSubtaskInput(subtask) {
-  const newSubtask = document.createElement('li')
-  const newSubtaskInput = document.createElement('input');
-  newSubtaskInput.type = 'text';
-  newSubtaskInput.classList.add('subtask__input');
-  newSubtask.appendChild(newSubtaskInput);
-  newSubtask.onkeyup = (e) => subtaskInputHandler(newSubtask, e);
-  subtask.after(newSubtask);
-  newSubtaskInput.focus();
-}
-
-function subtaskInputHandler(subtask, e) {
-  if (subtask.firstElementChild.value.trim()) {
-    if (e.key === 'Enter') createSubtaskInput(subtask);
-    else if (e.key === 'ArrowUp') subtask.previousElementSibling?.firstElementChild.focus();
-    else if (e.key === 'ArrowDown') subtask.nextElementSibling?.firstElementChild.focus();
-  } else if (addTask.subtasks.childElementCount > 1) {
-    if (e.key === 'Backspace' || e.key === 'Enter') {
-      if (subtask.previousElementSibling) subtask.previousElementSibling.firstElementChild.focus();
-      else subtask.nextElementSibling.firstElementChild.focus();
-    }
-    else if (e.key === 'ArrowUp') {
-      subtask.previousElementSibling?.firstElementChild.focus();
-    }
-    else if (e.key === 'ArrowDown') {
-      subtask.nextElementSibling?.firstElementChild.focus();
-    }
-    addTask.subtasks.removeChild(subtask);
-  }
-}
-
-function getSubtasks(task) {
-  task.data.subtasks = [];
-  const subtasksCount = addTask.subtasks.children.length;
-  for (let i = 1; i <= subtasksCount; i++) {
-    if (addTask.subtasks.children[0].firstElementChild.value.trim())
-      task.data.subtasks.push({ data: addTask.subtasks.children[0].firstElementChild.value });
-    if (addTask.subtasks.childElementCount > 1) addTask.subtasks.removeChild(addTask.subtasks.children[0]);
-    else addTask.subtasks.children[0].firstElementChild.value = '';
-  }
-}
 
 //* Settings
 const settings = document.querySelector('.settings');

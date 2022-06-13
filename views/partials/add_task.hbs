@@ -1,4 +1,4 @@
-<div class="add-task" {{#if desk.settings.editable}}{{else}}style="display: none;" {{/if}}>
+<div class="add-task js-new-task-block" {{#if desk.settings.editable}}{{else}}style="display: none;" {{/if}}>
   <div class="flex">
     <input type="text" id="task-input" maxlength="65">
     <ul class="params">
@@ -9,7 +9,7 @@
     <input type="hidden" class="id" value="{{desk._id}}">
     <input type="button" id="add-btn">
   </div>
-  <ul class="add-task__subtasks hide">
+  <ul class="add-task__subtasks hide" id="subtasks-input">
     <li><input type="text" class="subtask__input"></li>
   </ul>
 </div>

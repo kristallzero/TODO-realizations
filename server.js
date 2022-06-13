@@ -1,59 +1,82 @@
-import express from "express";
-import exphbs from "express-handlebars";
+import express from 'express';
 import mongoose from 'mongoose';
 
-import loadRoute from './routes/load.js';
-import addRoute from './routes/add.js';
-import doneRoutes from './routes/done.js';
-import deleteRoute from './routes/delete.js';
-import createRoute from './routes/create.js';
-import updatePreferenceRoute from './routes/updatePreference.js';
+import exphbs from 'express-handlebars';
+
+import session from 'express-session';
+import mongoStore from 'connect-mongodb-session';
+const MongoStore = mongoStore(session);
+
+import variables from './middleware/variables.js';
+
+import deskRoutes from './routes/desk.js';
+
+import MONGODB from './keys/index.js';
 
 import User from './models/user.js';
-import Desk from "./models/desk.js";
+import Desk from './models/desk.js';
 
-import keys from './keys/index.js';
-
-const PORT = process.env.PORT || 3000;
 
 const app = express();
+
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs'
 });
 
+const store = new MongoStore({
+  collection: 'sessions',
+  uri: MONGODB
+})
+
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-app.use(async (req, res, next) => {
-  req.user = User.findById(keys.defaultUserID);
-  next();
-});
+app.use(session({
+  secret: 'todo',
+  resave: false,
+  saveUninitialized: false,
+  store
+}));
 
 app.use(express.static('public'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/', loadRoute);
-app.use('/add', addRoute);
-app.use('/done', doneRoutes);
-app.use('/delete', deleteRoute);
-app.use('/create', createRoute);
-app.use('/updatePreference', updatePreferenceRoute);
+app.use(variables);
 
-async function start() {
-  await mongoose.connect(keys.MONGODB);
+app.use('/', deskRoutes);
+
+app.get('/', async (req, res) => {
+  if (!req.session.authenticated) return res.redirect('/auth');
+  const user = await req.user.populate('desks').select('username desks');
+  const { username, desks } = user;
+  
+  const desk = await Desk.findById(desks.splice(0, 1)).populate('tasks').lean();
+  await user.populate({ path: 'desks', select: 'settings users', options: { lean: true } });
+  
+  res.render('desk', { username, desk, desks });
+});
+
+const PORT = process.argv.PORT || 3000;
+
+async function main() {
+  await mongoose.connect(MONGODB);
   if (!await User.findOne()) {
     const desk = new Desk();
-    await desk.save();
     const user = new User({
-      email: 'testkristi@gmail.com',
-      user: 'kristi#0000',
+      username: 'test',
+      email: 'test@s',
+      password: '123',
       desks: [desk]
     });
     await user.save();
+    desk.users.admins.push(user._id);
+    await desk.save();
   }
-  app.listen(PORT, () => console.log(`Server is running on localhost:${PORT}`));
+
+  app.listen(PORT, () => console.log(`Server has started on localhost:${PORT}`));
 }
 
-start();
+main();

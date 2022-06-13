@@ -7,27 +7,27 @@
     <div class="task-text">
       {{#if metadata.multi}}
       <div class="title">
-        <input type="checkbox">
+        <input type="checkbox" {{#if metadata.done}}checked{{/if}}>
         {{data.title}}
       </div>
       <ul class="subtasks">
         {{#each data.subtasks}}
         <li {{#if done}}class="done" {{/if}}>
-          <input type="checkbox" {{#if done}}class="done" {{/if}}>
+          <input type="checkbox" {{#if done}}checked{{else if ../metadata.done}}checked{{/if}}>
           {{data}}
           <input type="hidden" class="id" value="{{_id}}">
         </li>
         {{/each}}
       </ul>
       {{else}}
-      <input type="checkbox">
+      <input type="checkbox" {{#if metadata.done}}checked{{/if}}>
       {{{data.title}}}
       {{/if}}
     </div>
     <div class="data">
-      <div class="date">{{metadata.date}}</div>
+      <div class="date js-date">{{metadata.date}}</div>
       <div>
-        {{metadata.author}}
+        {{metadata.author.username}}
         {{#if metadata.private}} (private){{/if}}
         <input type="button" class="edit-task" value="edit">
       </div>
