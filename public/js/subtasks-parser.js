@@ -27,7 +27,10 @@ function subtaskInputHandler(subtask, e) {
   if (subtask.firstElementChild.value.trim()) {
     if (e.key === 'Enter') createSubtaskInput(subtask);
     else if (e.key === 'ArrowUp') subtask.previousElementSibling?.firstElementChild.focus();
-    else if (e.key === 'ArrowDown') subtask.nextElementSibling?.firstElementChild.focus();
+    else if (e.key === 'ArrowDown') {
+      if (subtask.nextElementSibling) subtask.nextElementSibling.firstElementChild.focus();
+      else createSubtaskInput(subtask);
+    }
   } else if (addTask.subtasks.childElementCount > 1) {
     if (e.key === 'Backspace' || e.key === 'Enter') {
       if (subtask.previousElementSibling) subtask.previousElementSibling.firstElementChild.focus();

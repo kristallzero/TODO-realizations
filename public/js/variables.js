@@ -2,11 +2,11 @@
 
 const input_block = document.getElementById('add-task');
 
-const deskId = document.getElementById('desk-id').value;
+let deskId = document.getElementById('desk-id').value;
 const task_board = document.getElementById('tasks');
 const settings = document.getElementById('settings');
 
-const username = document.getElementById('username');
+const username = document.getElementById('username').textContent;
 
 const addTask = {
   addBtn: document.getElementById('add-btn'),

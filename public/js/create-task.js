@@ -13,9 +13,10 @@ function newTaskHandler() {
       title: addTask.taskInput.value
     };
     if (addTask.properties.multi.checked) getSubtasks(body);
-    fetch(`/${deskId}`, { method: 'POST', body: JSON.stringify(body), headers: { 'content-type': 'application/json' } })
+    fetch(`/desks/${deskId}`, { method: 'POST', body: JSON.stringify(body), headers: { 'content-type': 'application/json' } })
       .then(res => res.json())
-      .then(({ id, order }) => {
+      .then(({ id, order, error }) => {
+        if (error) throw new Error(error);
         body.order = order;
         addTaskHandler(body, id);
         addTask.taskInput.value = '';
@@ -52,7 +53,7 @@ function addTaskHandler(task, id) {
   <div class="data">
     ${toDate(Date.now())}
     <br>
-    ${task.author}${task.private ? ' (private)' : ''}
+    ${username}${task.private ? ' (private)' : ''}
     <input type="button" class="edit-task" value="edit">
   </div>
   <input type="button" class="delete">
@@ -62,6 +63,6 @@ function addTaskHandler(task, id) {
 
   task_board.insertBefore(
     taskElement,
-    task_board.children[task.metadata.order]
+    task_board.children[task.order]
   );
 }

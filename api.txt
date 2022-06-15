@@ -7,23 +7,23 @@ routers:
 
 GET / -> redirect ->
   /auth - without authentification
-  load the first created user's desk(like /{firstDeskID}) - with authentification 
+  /desks - with authentification 
 
 GET /auth -> render page auth.pug
   POST /auth/login -> check user email+password
   POST /auth/register -> register user(unique email)
 
+GET /desks - load the first created user's desk(like /{firstDeskID}) - with authentification 
+  GET /desks/{deskID} -> load desk by id + tasks (html)
+    POST /desks/{deskID} -> post a task to a desk
+    DELETE /desks/{deskID}/task?taskID={taskID} -> delete a task
+    PATCH /desks/{deskID}/task?taskID={taskID} -> mark a task as done
+    PATCH /desks/{deskID}/subTask?taskID={taskID}&subtaskID={subtaskID}
+    DELETE /desks/{deskID} -> delete desk
 
-GET /{deskID} -> load desk by id + tasks (html)
-  POST /{deskID}/ -> post a task to a desk
-  DELETE /{deskID}?taskID={taskID} -> delete a task
-  PATCH /{deskID}/done?taskID={taskID} -> mark a task as done
-  PATCH /{deskID}/doneSubtask?taskID={taskID}&subtaskID={subtaskID}
-  DELETE /{deskID} -> delete desk
-
-  PATCH /{deskID}/title?deskID={deskID}&value={newTitle} -> update a desk's title
-  PATCH /{deskID}/private?deskID={deskID}&value={privateBool} -> update the privatization settings
-  PATCH /{deskID}/editable?deskID={deskID}&value={editableBool} -> update the editing settings
+    PATCH /desks/{deskID}/title?deskID={deskID}&value={newTitle} -> update a desk's title
+    PATCH /desks/{deskID}/private?deskID={deskID}&value={privateBool} -> update the privatization settings
+    PATCH /desks/{deskID}/editable?deskID={deskID}&value={editableBool} -> update the editing settings
     
 GET /api/desks -> load current user's desks list (without tasks)
 GET /api/{username}/desks -> load public desks list of a user (without tasks)

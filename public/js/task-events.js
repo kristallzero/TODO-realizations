@@ -1,3 +1,8 @@
+for (let i = 0; i < task_board.children.length; i++) {
+  const task = task_board.children[i];
+  task.onclick = e => taskEventsRouter(e, task, task.querySelector('.delete').previousElementSibling.value);
+}
+
 function taskEventsRouter(e, task, id) {
   const input = e.target;
   switch (input.type) {
@@ -13,9 +18,10 @@ function taskEventsRouter(e, task, id) {
 }
 
 function checkboxHandler(checkbox, task, id) {
-  fetch(`/done/${deskId}/${id}?done=${checkbox.checked}`, { method: 'PATCH' })
-    .then(res => res.text())
-    .then(newOrder => {
+  fetch(`desks/${deskId}/task?taskID=${id}`, { method: 'PATCH', body: JSON.stringify({ done: checkbox.checked }), headers: { 'content-type': 'application/json' } })
+    .then(res => res.json())
+    .then(({ newOrder, error }) => {
+      if (error) throw new Error(error);
       if (task.classList.contains('multi'))
         Array.from(task.querySelector('.subtasks').children)
           .forEach(el => el.children[0].checked = el.classList.contains('done') || checkbox.checked);
@@ -23,6 +29,8 @@ function checkboxHandler(checkbox, task, id) {
       task_board.removeChild(task);
 
       task.classList.toggle('done');
+      console.log(newOrder)
+      console.log(task_board.children[newOrder]);
       task_board.insertBefore(task, task_board.children[+newOrder]);
     });
 }
@@ -33,7 +41,8 @@ function subCheckboxHandler(checkbox, task, subtask, taskId) {
 
   fetch(`done/${deskId}/${taskId}/${subtaskId}?done=${checkbox.checked}`, { method: 'PATCH' })
     .then(res => res.text())
-    .then(newOrder => {
+    .then(({ newOrder, error }) => {
+      if (error) throw new Error(error);
       if (!checkbox.checked) checkAllSubtasks(subtasks, task, taskId, false);
       subtasks.removeChild(subtask);
       subtask.classList.toggle('done');
@@ -51,8 +60,11 @@ function checkAllSubtasks(subtasks, task, id, checked) {
 }
 
 const deleteHandler = (task, id) =>
-  fetch(`/delete/${deskId}/${id}`, { method: 'DELETE' })
-    .then(() => task_board.removeChild(task));
+  fetch(`/desks/${deskId}/task?taskID=${id}`, { method: 'DELETE' })
+    .then(({ error }) => {
+      if (error) throw new Error(error);
+      task_board.removeChild(task)
+    });
 
 
 function editHandler(task, id) {
@@ -66,7 +78,7 @@ function editHandler(task, id) {
     const subtasks = task.querySelector('.subtasks');
     while (addTask.subtasks.childElementCount < subtasks.childElementCount)
       createSubtaskInput(addTask.subtasks.children[0]);
-    for (let i = 0; i < addTask.subtasks.childElementCount; i++) 
+    for (let i = 0; i < addTask.subtasks.childElementCount; i++)
       addTask.subtasks.children[i].firstElementChild.value = subtasks.children[i].innerText.slice(1);
   } else {
     addTask.taskInput.value = task.querySelector('.task-text').innerText.slice(1);

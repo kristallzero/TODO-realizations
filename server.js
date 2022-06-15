@@ -10,6 +10,7 @@ const MongoStore = mongoStore(session);
 import variables from './middleware/variables.js';
 
 import deskRoutes from './routes/desk.js';
+import authRoutes from './routes/auth.js';
 
 import MONGODB from './keys/index.js';
 
@@ -46,9 +47,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(variables);
 
-app.use('/', deskRoutes);
+app.use('/desks', deskRoutes);
+app.use('/auth', authRoutes);
 
 const PORT = process.argv.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.redirect('/desks');
+});
+
 
 async function main() {
   await mongoose.connect(MONGODB);
