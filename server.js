@@ -48,17 +48,6 @@ app.use(variables);
 
 app.use('/', deskRoutes);
 
-app.get('/', async (req, res) => {
-  if (!req.session.authenticated) return res.redirect('/auth');
-  const user = await req.user.populate('desks').select('username desks');
-  const { username, desks } = user;
-  
-  const desk = await Desk.findById(desks.splice(0, 1)).populate('tasks').lean();
-  await user.populate({ path: 'desks', select: 'settings users', options: { lean: true } });
-  
-  res.render('desk', { username, desk, desks });
-});
-
 const PORT = process.argv.PORT || 3000;
 
 async function main() {

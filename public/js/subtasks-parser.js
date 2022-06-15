@@ -48,7 +48,7 @@ function getSubtasks(task) {
   const subtasksCount = addTask.subtasks.children.length;
   for (let i = 1; i <= subtasksCount; i++) {
     if (addTask.subtasks.children[0].firstElementChild.value.trim())
-      task.subtasks.push({ data: addTask.subtasks.children[0].firstElementChild.value });
+      task.subtasks.push(addTask.subtasks.children[0].firstElementChild.value);
     if (addTask.subtasks.childElementCount > 1) addTask.subtasks.removeChild(addTask.subtasks.children[0]);
     else addTask.subtasks.children[0].firstElementChild.value = '';
   }
