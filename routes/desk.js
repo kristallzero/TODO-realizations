@@ -42,9 +42,9 @@ router.get('/:deskID', async (req, res) => {
     const desk = await Desk.findById(req.params.deskID).populate('tasks').lean();
     if (!desk) return res.redirect('/');
     let admin, user, viewer;
-    if (desk.users.admins.find(id => id == req.session.userId)) admin = true;
-    else if (desk.users.users.find(id => id == req.session.userId)) user = true;
-    else if (!desk.users.viewers.find(id => id == req.session.userId) && desk.settings.private) return res.redirect('/');
+    if (desk.users.admins.find(id => id == req.session.userID)) admin = true;
+    else if (desk.users.users.find(id => id == req.session.userID)) user = true;
+    else if (!desk.users.viewers.find(id => id == req.session.userID) && desk.settings.private) return res.redirect('/');
     else viewer = true;
 
     const currentUser = await req.user.select('username desks');
@@ -61,16 +61,16 @@ router.get('/:deskID', async (req, res) => {
   }
 });
 
-router.post('/:deskID', async (req, res) => {
+router.post('/:deskID/create', async (req, res) => {
   try {
     if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
     if (!mongoose.isValidObjectId(req.params.deskID)) return res.status(400).send({ error: 'Wrong ID syntax' });
 
     const desk = await Desk.findById(req.params.deskID);
     if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
-    if (!(desk.users.admins.includes(req.session.userId) || desk.users.users.includes(req.session.userId)))
-      return res.status(403).send({ error: 'You have not a permission to create a task' });
     if (!desk.settings.editable) return res.status(403).send({ error: 'The desk is not editable' });
+    if (!(desk.users.admins.includes(req.session.userID) || desk.users.users.includes(req.session.userID)))
+      return res.status(403).send({ error: 'You have not a permission to create a task' });
 
     const { multi, important, title } = req.body;
     const subtasks = req.body.subtasks?.map(subtask => ({ data: subtask }));
@@ -81,7 +81,7 @@ router.post('/:deskID', async (req, res) => {
       metadata: {
         author: {
           username,
-          id: req.session.userId
+          id: req.session.userID
         },
         multi,
         private: req.body.private,
@@ -95,7 +95,7 @@ router.post('/:deskID', async (req, res) => {
     await task.save();
     const order = await desk.addTask(task);
 
-    res.send({ id: task._id, order });
+    res.send({ id: task._id, subIDs: task.data.subtasks.map(subtask => subtask._id), order });
   } catch (e) {
     console.log(e);
     res.status(500).send({ error: 'Server error' });
@@ -110,9 +110,9 @@ router.delete('/:deskID/task', async (req, res) => {
 
     const desk = await Desk.findById(req.params.deskID);
     if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
-    if (!(desk.users.admins.includes(req.session.userId) || desk.users.users.includes(req.session.userId)))
-      return res.status(403).send({ error: 'You have not a permission to delete a task' });
     if (!desk.settings.editable) return res.status(403).send({ error: 'The desk is not editable' });
+    if (!(desk.users.admins.includes(req.session.userID) || desk.users.users.includes(req.session.userID)))
+      return res.status(403).send({ error: 'You have not a permission to delete a task' });
 
     const taskIndex = desk.tasks.findIndex(task => task._id == req.query.taskID);
     if (taskIndex === -1) return res.status(404).send({ error: 'Task Not Found' });
@@ -136,9 +136,9 @@ router.patch('/:deskID/task', async (req, res) => {
 
     const desk = await Desk.findById(req.params.deskID);
     if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
-    if (!(desk.users.admins.includes(req.session.userId) || desk.users.users.includes(req.session.userId)))
-      return res.status(403).send({ error: 'You have not a permission for editting tasks' });
     if (!desk.settings.editable) return res.status(403).send({ error: 'The desk is not editable' })
+    if (!(desk.users.admins.includes(req.session.userID) || desk.users.users.includes(req.session.userID)))
+      return res.status(403).send({ error: 'You have not a permission for editting tasks' });
 
     const newOrder = await desk.doneTask(req.query.taskID, req.body.done);
     if (newOrder === -1) return res.status(404).send({ error: 'Task Not Found' });
@@ -147,6 +147,136 @@ router.patch('/:deskID/task', async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(500).send({ error: 'Server error' });
+  }
+});
+
+router.patch('/:deskID/subtask', async (req, res) => {
+  try {
+    if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
+    if (!(mongoose.isValidObjectId(req.params.deskID) || mongoose.isValidObjectId(req.query.taskID) || mongoose.isValidObjectId(req.query.subtaskID)))
+      return res.status(400).send({ error: 'Wrong ID syntax' });
+    const desk = await Desk.findById(req.params.deskID);
+    if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
+    if (!desk.settings.editable) return res.status(403).send({ error: 'The desk is not editable' })
+    if (!(desk.users.admins.includes(req.session.userID) || desk.users.users.includes(req.session.userID)))
+      return res.status(403).send({ error: 'You have not a permission for editting tasks' });
+
+    const task = await Task.findById(desk.tasks.find(task => task == req.query.taskID));
+    if (!task) return res.status(404).send({ error: 'Task Not Found' })
+
+    const newOrder = await task.doneSubtask(req.query.subtaskID, req.body.done);
+    if (newOrder === -1) return res.status(404).send({ error: 'Subtask Not Found' });
+
+    res.send({ newOrder });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: 'Server error' });
+  }
+});
+
+router.delete('/:deskID', async (req, res) => {
+  try {
+    if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
+    if (!mongoose.isValidObjectId(req.params.deskID)) return res.status(400).send({ error: 'Wrong ID syntax' });
+
+    const desk = await Desk.findById(req.params.deskID);
+    if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
+    if (!desk.users.admins.includes(req.session.userID)) return res.status(403).send({ error: 'You are not an admin' });
+
+    await req.user.updateOne({ '$pull': { 'desks': mongoose.Types.ObjectId(req.params.deskID) } });
+    await Desk.findByIdAndDelete(req.params.deskID);
+    res.status(200).send({});
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: 'Server error' });
+  }
+});
+
+router.post('/new', async (req, res) => {
+  try {
+    if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
+
+    const { title } = req.query;
+    if (!title) return res.status(400).send({ error: 'Wrong request syntax' });
+    if (title.length > 20) return res.status(400).send({ error: 'Too long title' });
+
+    const desk = new Desk({
+      settings: { title },
+      users: {
+        admins: [req.session.userID]
+      }
+    });
+    await desk.save();
+    await req.user.updateOne({ '$push': { 'desks': desk } });
+
+    res.status(200).send({ id: desk._id });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: 'Server Error' });
+  }
+});
+
+router.patch('/:deskID/title', async (req, res) => {
+  try {
+    if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
+    if (!mongoose.isValidObjectId(req.params.deskID)) return res.status(400).send({ error: 'Wrong ID syntax' });
+
+    const title = req.query.value;
+    if (!title) return res.status(400).send({ error: 'Wrong request syntax' });
+    if (title > 20) return res.status(400).send({ error: 'Too long title' });
+
+    const desk = await Desk.findById(req.params.deskID);
+    if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
+    if (!desk.users.admins.includes(req.session.userID)) return res.status(403).send({ error: 'You are not an admin' });
+
+    await desk.updateOne({ 'settings.title': req.query.value });
+
+    res.status(200).send({});
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: 'Server Error' });
+  }
+});
+
+router.patch('/:deskID/private', async (req, res) => {
+  try {
+    if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
+    if (!mongoose.isValidObjectId(req.params.deskID)) return res.status(400).send({ error: 'Wrong ID syntax' });
+
+    const { value } = req.query;
+    if (!value) return res.status(400).send({ error: 'Wrong request syntax' });
+
+    const desk = await Desk.findById(req.params.deskID);
+    if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
+    if (!desk.users.admins.includes(req.session.userID)) return res.status(403).send({ error: 'You are not an admin' });
+
+    await desk.updateOne({ 'settings.private': value === 'true' });
+
+    res.status(200).send({});
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: 'Server Error' });
+  }
+});
+
+router.patch('/:deskID/editable', async (req, res) => {
+  try {
+    if (!req.session.authenticated) return res.status(401).send({ error: 'Unauthorized' });
+    if (!mongoose.isValidObjectId(req.params.deskID)) return res.status(400).send({ error: 'Wrong ID syntax' });
+
+    const { value } = req.query;
+    if (!value) return res.status(400).send({ error: 'Wrong request syntax' });
+
+    const desk = await Desk.findById(req.params.deskID);
+    if (!desk) return res.status(404).send({ error: 'Desk Not Found' });
+    if (!desk.users.admins.includes(req.session.userID)) return res.status(403).send({ error: 'You are not an admin' });
+
+    await desk.updateOne({ 'settings.editable': value === 'true' });
+
+    res.status(200).send({});
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: 'Server Error' });
   }
 });
 

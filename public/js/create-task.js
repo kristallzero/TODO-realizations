@@ -13,19 +13,19 @@ function newTaskHandler() {
       title: addTask.taskInput.value
     };
     if (addTask.properties.multi.checked) getSubtasks(body);
-    fetch(`/desks/${deskId}`, { method: 'POST', body: JSON.stringify(body), headers: { 'content-type': 'application/json' } })
+    fetch(`/desks/${deskId}/create`, { method: 'POST', body: JSON.stringify(body), headers: { 'content-type': 'application/json', 'X-XSRF-TOKEN': csrf } })
       .then(res => res.json())
-      .then(({ id, order, error }) => {
+      .then(({ id, order, error, subIDs }) => {
         if (error) throw new Error(error);
         body.order = order;
-        addTaskHandler(body, id);
+        addTaskHandler(body, id, subIDs);
         addTask.taskInput.value = '';
         document.body.style.cursor = "auto";
       });
   }
 }
 
-function addTaskHandler(task, id) {
+function addTaskHandler(task, id, subIDs) {
   const taskElement = document.createElement('li');
 
   if (task.important) taskElement.classList.add('important');
@@ -38,10 +38,11 @@ function addTaskHandler(task, id) {
     </div>`;
     taskElement.classList.add('multi');
     let task_subtasks = '<ul class="subtasks">';
-    task.subtasks.forEach(el => task_subtasks += `
+    task.subtasks.forEach((el, i) => task_subtasks += `
     <li>
       <input type="checkbox">
       ${el}
+      <input type="hidden" class="id" value="${subIDs[i]}">
     </li>`);
     task_subtasks += '</ul>';
 

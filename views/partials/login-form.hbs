@@ -1,0 +1,37 @@
+<div class="modal modal-fixed-footer" id="login">
+  <form action="/auth/login" method="POST">
+    <div class="modal-content">
+      <div class="container">
+        <h5 class="center">Login</h5>
+        <div class="row">
+
+          <div class="col m12 s12">
+            <div class="input-field">
+              <i class="material-icons prefix">person</i>
+              <input type="email" name="email" id="lemail" required>
+              <label for="lemail">Email</label>
+              <span class="helper-text" data-error="Input email"></span>
+            </div>
+
+            <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input type="password" name="password" id="lpassword" required>
+              <label for="lpassword">Password</label>
+              <span class="helper-text" data-error="Input password"></span>
+            </div>
+          </div>
+
+          {{#if loginError}}<p class="right red-text text-darken-3">{{loginError}}</p>{{/if}}
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="container">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+        <input type="submit" value="login" class="btn pulse">
+        <input type="button" value="close" class="btn modal-close red">
+      </div>
+    </div>
+  </form>
+</div>

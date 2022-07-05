@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col l3 m3 s12"></div>
+    <div class="col l6 m6 s12">
+      <form action="/auth/register" method="POST">
+        <div class="card-panel">
+          <h5 class="center">Registration</h5>
+
+          <div class="input-field">
+            <i class="material-icons prefix">person</i>
+            <input type="text" name="username" id="username" class="validate" required>
+            <label for="username">Username</label>
+            <span class="helper-text" data-error="Input username"></span>
+          </div>
+
+          <div class="input-field">
+            <i class="material-icons prefix">email</i>
+            <input type="email" name="email" id="email" class="validate" required>
+            <label for="email">Email</label>
+            <span class="helper-text" data-error="Введите почту"></span>
+          </div>
+
+          <div class="input-field">
+            <i class="material-icons prefix">lock</i>
+            <input type="password" name="password" id="password" required>
+            <label for="password">Password</label>
+            <span class="helper-text" data-error="Введите пароль"></span>
+          </div>
+
+          <div class="input-field">
+            <i class="material-icons prefix">vpn_key</i>
+            <input type="password" name="check" id="check" required>
+            <label for="check">Confirm password</label>
+            <span class="helper-text" data-error="Введите пароль еще раз"></span>
+          </div>
+          <div class="right">
+            <p>Have a profile? <a href="#login" class="modal-trigger">Login</a></p>
+            {{#if registerError}}<p class="red-text text-darken-3">{{registerError}}</p>{{/if}}
+          </div>
+          <input type="hidden" name="_csrf" value="{{csrf}}">
+          <input type="submit" value="create a profile" class="btn left col s12">
+
+          <div class="clearfix"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@
       <input type="button">
     </div>
     <ul>
-      <li class="current"><a href="/desks/{{desk._id}}" class="desk">{{desk.settings.title}}<span> ({{#if
+      <li class="current"><a href="/desks/{{desk._id}}" class="desk">{{desk.settings.title}} <span>({{#if
             desk.settings.private}}private{{else}}public{{/if}})</span></a><input type="button" class="edit-desk"
           value="edit"><input type="button" class="delete-desk" value="delete"></li>
       {{#each desks}}

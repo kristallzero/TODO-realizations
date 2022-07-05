@@ -7,6 +7,8 @@ import session from 'express-session';
 import mongoStore from 'connect-mongodb-session';
 const MongoStore = mongoStore(session);
 
+import csurf from 'csurf';
+import flash from 'connect-flash';
 import variables from './middleware/variables.js';
 
 import deskRoutes from './routes/desk.js';
@@ -45,6 +47,8 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(csurf());
+app.use(flash());
 app.use(variables);
 
 app.use('/desks', deskRoutes);
@@ -55,7 +59,6 @@ const PORT = process.argv.PORT || 3000;
 app.get('/', (req, res) => {
   res.redirect('/desks');
 });
-
 
 async function main() {
   await mongoose.connect(MONGODB);
@@ -71,7 +74,6 @@ async function main() {
     desk.users.admins.push(user._id);
     await desk.save();
   }
-
   app.listen(PORT, () => console.log(`Server has started on localhost:${PORT}`));
 }
 

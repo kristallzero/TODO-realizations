@@ -65,7 +65,7 @@ deskSchema.methods = {
       res(order);
     });
   },
-  async doneTask(taskID, done) {
+  doneTask(taskID, done) {
     return new Promise(async res => {
       await this.populate('tasks');
       const taskIndex = this.tasks.findIndex(task => task._id == taskID);
@@ -81,7 +81,7 @@ deskSchema.methods = {
 
       const task = this.tasks.splice(taskIndex, 1)[0];
       this.tasks.splice(order, 0, task);
-      await Task.findByIdAndUpdate(taskID, { $set: { "metadata.done": done}});
+      await Task.findByIdAndUpdate(taskID, { $set: { "metadata.done": done } });
       await this.save();
       res(order);
     });

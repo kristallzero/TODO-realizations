@@ -18,7 +18,7 @@ function taskEventsRouter(e, task, id) {
 }
 
 function checkboxHandler(checkbox, task, id) {
-  fetch(`desks/${deskId}/task?taskID=${id}`, { method: 'PATCH', body: JSON.stringify({ done: checkbox.checked }), headers: { 'content-type': 'application/json' } })
+  fetch(`desks/${deskId}/task?taskID=${id}`, { method: 'PATCH', body: JSON.stringify({ done: checkbox.checked }), headers: { 'content-type': 'application/json', 'X-XSRF-TOKEN': csrf } })
     .then(res => res.json())
     .then(({ newOrder, error }) => {
       if (error) throw new Error(error);
@@ -26,11 +26,8 @@ function checkboxHandler(checkbox, task, id) {
         Array.from(task.querySelector('.subtasks').children)
           .forEach(el => el.children[0].checked = el.classList.contains('done') || checkbox.checked);
 
-      task_board.removeChild(task);
-
       task.classList.toggle('done');
-      console.log(newOrder)
-      console.log(task_board.children[newOrder]);
+      task_board.removeChild(task);
       task_board.insertBefore(task, task_board.children[+newOrder]);
     });
 }
@@ -39,20 +36,22 @@ function subCheckboxHandler(checkbox, task, subtask, taskId) {
   const subtaskId = subtask.querySelector('.id').value;
   const subtasks = task.querySelector('.subtasks');
 
-  fetch(`done/${deskId}/${taskId}/${subtaskId}?done=${checkbox.checked}`, { method: 'PATCH' })
-    .then(res => res.text())
+  fetch(`desks/${deskId}/subtask?taskID=${taskId}&subtaskID=${subtaskId}`, { method: 'PATCH', body: JSON.stringify({ done: checkbox.checked }), headers: { 'content-type': 'application/json', 'X-XSRF-TOKEN': csrf } })
+    .then(res => res.json())
     .then(({ newOrder, error }) => {
       if (error) throw new Error(error);
       if (!checkbox.checked) checkAllSubtasks(subtasks, task, taskId, false);
       subtasks.removeChild(subtask);
-      subtask.classList.toggle('done');
       subtasks.insertBefore(subtask, subtasks.children[+newOrder]);
-      if (checkbox.checked) checkAllSubtasks(subtasks, task, taskId, true);
+      if (checkbox.checked) {
+        subtask.classList.add('done');
+        checkAllSubtasks(subtasks, task, taskId, true);
+      } else subtask.classList.remove('done');
     });
 }
 
 function checkAllSubtasks(subtasks, task, id, checked) {
-  if (Array.from(subtasks.children).every(el => el.classList.contains('done'))) {
+  if (task.classList.contains('done') || Array.from(subtasks.children).every(el => el.classList.contains('done'))) {
     const checkbox = task.querySelector('input');
     checkbox.checked = checked;
     checkboxHandler(checkbox, task, id);
@@ -60,10 +59,10 @@ function checkAllSubtasks(subtasks, task, id, checked) {
 }
 
 const deleteHandler = (task, id) =>
-  fetch(`/desks/${deskId}/task?taskID=${id}`, { method: 'DELETE' })
+  fetch(`/desks/${deskId}/task?taskID=${id}`, { method: 'DELETE', headers: { 'X-XSRF-TOKEN': csrf } })
     .then(({ error }) => {
       if (error) throw new Error(error);
-      task_board.removeChild(task)
+      task_board.removeChild(task);
     });
 
 
