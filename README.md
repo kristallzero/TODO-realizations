@@ -1,7 +1,4 @@
 # Simple TODO
-This project was written with express js 
-
-This is my first implementation of a synced TODO list — Simple TODO
 
 # Features 
 - Every task will be saved on the server
