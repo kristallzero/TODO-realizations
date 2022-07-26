@@ -1,17 +1,11 @@
 # Simple TODO
 
-# Features 
-- Every task will be saved on the server
-- All tasks can be editted/deleted/marked as done
-- Every task can contain subtasks
-
 # Starting up
 - `npm install` / `npm i` - install all dependencies
 - Before starting server, please create file index.js in the folder keys and type that keys:<br>
 ```js
 export default {
-  MONGODB: 'MongoDB database url',
-  defaultUserID: 'After first startup, new user will be created, insert here his ID'
+  MONGODB: 'MongoDB database url'
 }
 ```
 
